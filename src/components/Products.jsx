@@ -49,12 +49,11 @@ import batomHidratante from '../assets/products/batom.jpeg';
 
  ];
 
- function Products() {
+ function products() {
    return (
       <section className="products-section">
          <div className="product-heading">
             <span>PRODUTOS EM DESTAQUE</span>
-            <h2>Nossos favoritos para você</h2>
          </div>  
 
          <div className='products-grid'>
@@ -78,16 +77,13 @@ import batomHidratante from '../assets/products/batom.jpeg';
                   })}
                </p>
 
-
-
-            </article>
-            
-            
+               <button className="add-to-cart">
+                  Adicionar ao carrinho
+               </button>
+            </article> 
             )}
-
          </div>
-      </section>
-      
+      </section>  
    )
 
  }

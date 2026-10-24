@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header.jsx';
+import Products from './components/Products.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <>
                 <h1>Ivone Beauty Products</h1>
                 <p>Explore nossos produtos de beleza e cuidado.</p>
+                <Products />
               </>
             }
           />
