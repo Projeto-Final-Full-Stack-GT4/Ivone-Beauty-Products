@@ -7,7 +7,7 @@ import batomHidratante from '../assets/products/batom.jpeg';
 
 
 
- const Products = [
+ const products = [
     {
     id: 1,
     name: 'Sérum Facial Revitalizante',
@@ -49,15 +49,15 @@ import batomHidratante from '../assets/products/batom.jpeg';
 
  ];
 
- function products() {
+ function Products() {
    return (
       <section className="products-section">
-         <div className="product-heading">
+         <div className="products-heading">
             <span>PRODUTOS EM DESTAQUE</span>
          </div>  
 
          <div className='products-grid'>
-            {Products.map((product) => 
+            {products.map((product) => 
             <article className="product-card" key={product.id}>
                <span className="product-tag">{product.tag}</span>
 
@@ -67,7 +67,7 @@ import batomHidratante from '../assets/products/batom.jpeg';
 
                <div className="product-info">
                   <h3>{product.name}</h3>
-                  <P className="product-size">{product.size}</P>
+                  <p className="product-size">{product.size}</p>
                </div>
 
                <p className="product-price">
@@ -89,4 +89,3 @@ import batomHidratante from '../assets/products/batom.jpeg';
  }
 
  export default Products;
-
