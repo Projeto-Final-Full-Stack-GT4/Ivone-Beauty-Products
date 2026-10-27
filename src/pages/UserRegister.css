@@ -1,0 +1,109 @@
+.user-register {
+  display: flex;
+  justify-content: center;
+  padding: 3.5rem 1rem 5rem;
+}
+
+.user-register__card {
+  width: min(100%, 34rem);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background: #fffdfa;
+  border: 1px solid var(--bege);
+  border-radius: 1rem;
+  box-shadow: 0 1rem 3rem rgb(78 23 39 / 8%);
+}
+
+.user-register__eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--vinho);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.user-register__title {
+  margin: 0;
+  color: var(--vinho-escuro);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  font-weight: 600;
+  text-align: center;
+}
+
+.user-register__description {
+  margin: 0.5rem 0 2rem;
+  color: var(--texto);
+  text-align: center;
+}
+
+.user-register__form {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.user-register__field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.user-register__field label {
+  color: var(--texto);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.user-register__field input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
+  color: var(--texto);
+  background: #fff;
+  border: 1px solid #cbb8aa;
+  border-radius: 0.4rem;
+  font: inherit;
+}
+
+.user-register__field input:focus {
+  border-color: var(--vinho);
+  outline: 2px solid rgb(78 23 39 / 18%);
+  outline-offset: 1px;
+}
+
+.user-register__field small {
+  color: #665756;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.user-register__submit {
+  min-height: 3.2rem;
+  margin-top: 0.4rem;
+  color: #fff;
+  background: var(--vinho);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+
+.user-register__submit:hover {
+  background: var(--vinho-escuro);
+}
+
+.user-register__submit:focus-visible {
+  outline: 3px solid var(--bege);
+  outline-offset: 3px;
+}
+
+.user-register__status {
+  margin: 0;
+  color: var(--vinho-escuro);
+  font-size: 0.9rem;
+  text-align: center;
+}
