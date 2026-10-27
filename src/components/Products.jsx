@@ -2,7 +2,7 @@
  import serumImage from '../assets/products/serum_facial.png';
  import gelImage from '../assets/products/Gel_de_Limpeza.png';
  import poCompacto from '../assets/products/po_compacto.jpeg';
-import batomHidratante from '../assets/products/batom.jpeg';
+ import batomHidratante from '../assets/products/batom.jpeg';
 
 
 
