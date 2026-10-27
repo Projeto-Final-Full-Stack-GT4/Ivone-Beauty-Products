@@ -1,0 +1,110 @@
+.campaigns {
+  display: grid;
+  width: 100%;
+  gap: 12px;
+  margin: 20px auto 0;
+}
+
+.campaigns__viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.campaigns__track {
+  display: flex;
+  width: 100%;
+  transition: transform 500ms ease;
+}
+
+.campaign {
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.campaign img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.campaign:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.campaigns__controls,
+.campaigns__indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campaigns__controls {
+  gap: 12px;
+}
+
+.campaigns__controls > button,
+.campaigns__indicators button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #4b1724;
+  cursor: pointer;
+}
+
+.campaigns__controls > button {
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+.campaigns__controls > button:hover,
+.campaigns__controls > button:focus-visible {
+  background: #f2ece2;
+}
+
+.campaigns__indicators {
+  gap: 4px;
+}
+
+.campaigns__indicators button::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #b6aa9d;
+  content: '';
+}
+
+.campaigns__indicators button.is-active::before {
+  background: #4b1724;
+}
+
+.campaigns__controls button:focus-visible {
+  outline: 2px solid #4b1724;
+  outline-offset: -3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campaigns__track {
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .campaigns {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .campaigns__controls > button,
+  .campaigns__indicators button {
+    width: 36px;
+    height: 36px;
+  }
+}

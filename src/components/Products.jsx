@@ -51,7 +51,7 @@ import batomHidratante from '../assets/products/batom.jpeg';
 
  function Products() {
    return (
-      <section className="products-section">
+      <section className="products-section" id="produtos">
          <div className="products-heading">
             <span>PRODUTOS EM DESTAQUE</span>
          </div>  
