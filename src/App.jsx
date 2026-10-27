@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header.jsx';
-import Home from './pages/Home.jsx';
-
+import Products from './components/Products.jsx';
 
 function App() {
   return (
@@ -12,8 +11,20 @@ function App() {
       />
       <main className="container">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<p>Esta página estará disponível em breve.</p>} />
+          <Route
+            path="/"
+            element={
+              <>
+                <h1>Ivone Beauty Products</h1>
+                <p>Explore nossos produtos de beleza e cuidado.</p>
+                <Products />
+              </>
+            }
+          />
+          <Route
+            path="*"
+            element={<p>Esta página estará disponível em breve.</p>}
+          />
         </Routes>
       </main>
     </BrowserRouter>
