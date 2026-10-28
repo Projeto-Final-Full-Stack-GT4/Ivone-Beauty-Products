@@ -1,3 +1,5 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Hero.css";
 import imagemModelo from "../assets/hero-modelo.jpg";
 import imagemProdutos from "../assets/hero-produtos.jpg";
@@ -24,9 +26,7 @@ export default function Hero({
         <p className="hero__sub">{subtitulo}</p>
         <a className="hero__btn" href={ctaHref}>
           {ctaTexto}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M4 12h16M14 6l6 6-6 6" />
-          </svg>
+          <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
         </a>
       </div>
 
