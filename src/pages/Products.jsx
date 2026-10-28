@@ -1,13 +1,27 @@
 import products from '../data/products';
 import '../components/Products.css';
+import { useSearchParams } from 'react-router-dom';
 
 function Products() {
+    
+    const [searchParams] = useSearchParams();
+    const category = searchParams.get('categoria');
+
+    const filteredProducts = category
+      ? products.filter((product) => product.category === category)
+      : products;
+
     return (
         <section>
             <h1>Todos os produtos</h1>
 
+            {filteredProducts.length === 0 && (
+                <p>Nenhum produto encontrado nessa categoria.</p>
+
+            )}
+
             <div className="products-grid">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                      <article className="product-card" key={product.id}>
                    <span className="product-tag">{product.tag}</span>
                    <div className="product-image">
