@@ -1,0 +1,187 @@
+
+/* 1. Configurações gerais */
+.footer {
+  width: 100%;
+  color: #f8eee2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 2. Faixa superior vinho */
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 7%;
+  min-height: 70px;
+  background-color: #45151c;
+}
+
+/* 3. Marca */
+.brand {
+  display: flex;
+  align-items: center;
+  min-width: 190px;
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: Georgia, serif;
+  letter-spacing: 3px;
+}
+
+.brand-name span {
+  font-size: 19px;
+}
+
+.brand-name small {
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: 2px;
+}
+
+/* 4. Newsletter */
+.newsletter {
+  flex: 1;
+  max-width: 420px;
+  padding: 0 22px;
+  text-align: center;
+  border-left: 1px solid #78434a;
+  border-right: 1px solid #78434a;
+}
+
+.newsletter p {
+  margin: 0 0 7px;
+  font-size: 10px;
+}
+
+.newsletter-form {
+  display: flex;
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #d4b69a;
+  border-radius: 20px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  width: 60%;
+  min-width: 0;
+  padding: 8px 12px;
+  border: none;
+  outline: none;
+  background-color: #fffaf4;
+  color: #45151c;
+  font-size: 10px;
+}
+
+.newsletter-form button {
+  border: none;
+  padding: 8px 10px;
+  background-color: #45151c;
+  color: #fffaf4;
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 5. Redes sociais */
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.social-links a {
+  color: #f8eee2;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* 6. Faixa inferior bege */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 38px;
+  padding: 10px 5%;
+  background-color: #f3eade;
+  color: #55433c;
+}
+
+/* 7. Links inferiores */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.footer-links a {
+  padding: 0 10px;
+  border-right: 1px solid #d2c2b2;
+  color: #55433c;
+  text-decoration: none;
+  font-size: 9px;
+}
+
+.footer-links a:first-child {
+  padding-left: 0;
+}
+
+.footer-links a:last-child {
+  border-right: none;
+}
+
+.footer-links a:hover {
+  color: #8c4a4e;
+}
+
+/* 8. Direitos autorais */
+.copyright {
+  margin: 0;
+  font-size: 8px;
+  text-align: right;
+}
+
+/* 9. Adaptação para celulares */
+@media (max-width: 700px) {
+  .footer-top {
+    flex-direction: column;
+    padding: 24px 18px;
+    gap: 22px;
+  }
+
+  .newsletter {
+    width: 100%;
+    padding: 18px 0;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #78434a;
+    border-bottom: 1px solid #78434a;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 12px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    row-gap: 12px;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}
