@@ -1,6 +1,7 @@
 import products from '../data/products';
 import '../components/Products.css';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
+
 
 function Products() {
     
@@ -25,10 +26,15 @@ function Products() {
                      <article className="product-card" key={product.id}>
                    <span className="product-tag">{product.tag}</span>
                    <div className="product-image">
+                      <Link to={`/product/${product.id}`}>
                       <img src={product.image} alt={product.name}/>
+                      </Link>
+
                    </div>
                    <div className="product-info">
-                      <h3>{product.name}</h3>
+                      <Link to={`/product/${product.id}`}>
+                         <h3>{product.name}</h3>
+                      </Link>
                       <p className="product-size">{product.size}</p>
                    </div>
                    <p className="product-price">
