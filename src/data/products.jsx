@@ -7,6 +7,7 @@
     {
     id: 1,
     name: 'Sérum Facial Revitalizante',
+    category: 'skincare',
     size: '30ml',
     price: 89.90,
     tag: 'Mais Vendido',
@@ -17,6 +18,7 @@
     {
       id: 2,
       name: 'Gel de Limpeza Facial',
+      category: 'skincare',
       size: '120ml',
       price: 49.90,
       tag: 'Vegano',
@@ -27,6 +29,7 @@
     {
       id: 3,
       name: 'Pó Compacto Matte',
+      category: 'maquiagem',
       size: '10g',
       price: 69.90,
       tag: 'Lançamento',
@@ -37,6 +40,7 @@
     {
       id: 4,
       name: 'Batom Hidradante',
+      category: 'maquiagem',
       size: '4g',
       price: 59.90,
       tag: 'Mais Vendido',
