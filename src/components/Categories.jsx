@@ -32,6 +32,28 @@ const categories = [
 
 function Categories() {
     return (
-        
-    )
+        <section className='categories-section'>
+            <div className='categories-heading'>
+                <span>Nossas Categorias</span>
+                <h2>Encontre o que combina com você</h2>
+            </div>
+
+            <div className='categories-grid'>
+            {categories.map((category) => 
+            <article className="category-card" key={category.id}>
+            <img src={category.image} alt={category.name} />
+
+            <div className='category-info'>
+                <h3>{category.name}</h3>
+                <p>{category.description}</p>
+            </div>
+
+            </article>
+            )}
+            </div>
+
+        </section>
+    );
 }
+
+export default Categories;
