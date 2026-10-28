@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Home from './pages/Home.jsx';
+import UserRegister from './pages/UserRegister.jsx';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <main className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/registro" element={<UserRegister />} />
           <Route path="*" element={<p>Esta página estará disponível em breve.</p>} />
         </Routes>
       </main>
