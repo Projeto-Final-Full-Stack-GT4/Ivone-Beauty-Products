@@ -1,0 +1,80 @@
+
+/* Login e perfil - Ivone Beauty */
+
+.auth-container {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e6d7c3;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(74, 21, 33, 0.08);
+}
+
+.auth-card h1 {
+  color: #4a1521;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.auth-card > p {
+  text-align: center;
+}
+
+.auth-card label {
+  display: block;
+  color: #4a1521;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.auth-card .form-control {
+  border-color: #e6d7c3;
+  padding: 10px;
+}
+
+.auth-card .form-control:focus {
+  border-color: #8fa382;
+  box-shadow: 0 0 0 0.2rem rgba(143, 163, 130, 0.25);
+}
+
+.btn-ivone {
+  color: #ffffff;
+  background: #4a1521;
+  border: 1px solid #4a1521;
+  padding: 10px;
+}
+
+.btn-ivone:hover {
+  color: #ffffff;
+  background: #672535;
+}
+
+.auth-error {
+  color: #b42318;
+  font-size: 14px;
+}
+
+.auth-success {
+  color: #365b40;
+  font-size: 14px;
+}
+
+.auth-card a {
+  color: #4a1521;
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .auth-card {
+    padding: 22px;
+  }
+}

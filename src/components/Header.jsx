@@ -18,6 +18,7 @@ function Header({
           <Link className="site-header__link" to="/products">Produtos</Link>
           <Link className="site-header__link" to="/wishlist">Lista de desejos</Link>
           <Link className="site-header__link" to="/cart">Carrinho</Link>
+          <Link className="site-header__link" to="/login">Login</Link>
         </nav>
       </div>
     </header>
