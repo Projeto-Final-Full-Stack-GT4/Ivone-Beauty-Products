@@ -5,30 +5,36 @@ import Home from './pages/Home.jsx';
 import Products from './pages/Products.jsx';
 import Product from './pages/Product.jsx';
 import UserRegister from './pages/UserRegister.jsx';
-import { WishlistProvider } from './context/WishlistContext.jsx';
+import ViewCart from './pages/ViewCart.jsx';
+import About from './pages/About.jsx';
 import Wishlist from './pages/Wishlist.jsx';
+import { CartProvider } from './context/CartProvider.jsx';
+import { WishlistProvider } from './context/WishlistProvider.jsx';
+
 
 
 function App() {
   return (
     <WishlistProvider>
     <BrowserRouter>
-      <Header
-        brand="Ivone Beauty Products"
-        description="Beleza e cuidado para você"
-      />
-      <main className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products/>} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/registro" element={<UserRegister />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          
-          <Route path="*" element={<p>Esta página estará disponível em breve.</p>} />
-        </Routes>
-      </main>
-      <Footer/>
+      <CartProvider>
+        <WishlistProvider>
+          <Header />
+          <main className="site-main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/cart" element={<ViewCart />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/registro" element={<UserRegister />} />
+              <Route path="/sobre" element={<About />} />
+              <Route path="*" element={<p>Esta página estará disponível em breve.</p>} />
+            </Routes>
+          </main>
+          <Footer />
+        </WishlistProvider>
+      </CartProvider>
     </BrowserRouter>
     </WishlistProvider>
 

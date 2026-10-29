@@ -1,82 +1,57 @@
-
 import { Link } from 'react-router-dom';
-import products from '../data/products';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useCart } from '../context/CartContext.js';
 import { useWishlist } from '../context/WishlistContext.jsx';
+import '../components/Products.css';
 import './Wishlist.css';
 
 function Wishlist() {
-  const { wishlistIds, removeFromWishlist } = useWishlist();
-
-  const favoriteProducts = products.filter((product) =>
-    wishlistIds.includes(product.id)
-  );
+  const { items, toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   return (
-    <section className="wishlist-section">
-      <div className="wishlist-heading">
-        <span>SELEÇÃO ESPECIAL</span>
-        <h1>Minha Wishlist ♡</h1>
-        <p>Seus produtos favoritos estão aqui.</p>
-      </div>
+    <section className="wishlist-page">
+      <h1 className="wishlist-page__title">Minha lista de desejos</h1>
 
-      {favoriteProducts.length === 0 ? (
+      {items.length === 0 ? (
         <div className="wishlist-empty">
-          <div className="wishlist-empty-icon">♡</div>
-          <h2>Sua wishlist está vazia</h2>
-          <p>
-            Você ainda não salvou nenhum produto.
-            Explore nossa coleção e escolha seus favoritos!
-          </p>
-          <Link to="/products" className="wishlist-back-button">
-            Explorar produtos
-          </Link>
+          <p>Sua lista ainda está vazia.</p>
+          <Link to="/products">Explore nossos produtos</Link>
         </div>
       ) : (
-        <div className="wishlist-grid">
-          {favoriteProducts.map((product) => (
-            <article className="wishlist-card" key={product.id}>
-              <div className="wishlist-image">
+        <div className="products-grid">
+          {items.map((product) => (
+            <article className="product-card" key={product.id}>
+              <button
+                className={`product-wishlist${isInWishlist(product.id) ? ' product-wishlist--active' : ''}`}
+                type="button"
+                onClick={() => toggleWishlist(product)}
+                aria-label={`Remover ${product.name} da lista de desejos`}
+                aria-pressed={isInWishlist(product.id)}
+              >
+                <FontAwesomeIcon icon={faHeart} aria-hidden="true" />
+              </button>
+              <div className="product-image">
                 <Link to={`/product/${product.id}`}>
-                  {product.image ? (
-                    <img src={product.image} alt={product.name} />
-                  ) : (
-                    <div
-                      className="wishlist-illustration"
-                      role="img"
-                      aria-label={product.name}
-                    >
-                      {product.illustration}
-                    </div>
-                  )}
+                  <img src={product.image} alt={product.name} />
                 </Link>
               </div>
-
-              <div className="wishlist-info">
-                <h3>{product.name}</h3>
-                <p className="wishlist-size">{product.size}</p>
-                <p className="wishlist-price">
-                  {product.price.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
-                </p>
-              </div>
-
-              <div className="wishlist-actions">
-                <Link
-                  to={`/product/${product.id}`}
-                  className="wishlist-back-button"
-                >
-                  Ver produto
+              <div className="product-info">
+                <Link to={`/product/${product.id}`}>
+                  <h2>{product.name}</h2>
                 </Link>
-
-                <button
-                  className="wishlist-remove-button"
-                  onClick={() => removeFromWishlist(product.id)}
-                >
-                  Remover dos favoritos
-                </button>
+                <p className="product-size">{product.size}</p>
               </div>
+              <p className="product-price">
+                {product.price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </p>
+              <button className="add-to-cart" type="button" onClick={() => addToCart(product)}>
+                Adicionar ao carrinho
+              </button>
             </article>
           ))}
         </div>

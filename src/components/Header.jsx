@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faMagnifyingGlass, faBagShopping, faTruck, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useCart } from "../context/CartContext.js";
 import "./Header.css";
 
 // Edite aqui os links do menu (to = rota)
@@ -14,9 +15,19 @@ const MENU = [
   { texto: "Sobre nós", to: "/sobre" },
 ];
 
-export default function Header({ qtdCarrinho = 0 }) {
+export default function Header() {
   const { pathname, search } = useLocation();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { totalItems } = useCart();
   const atual = pathname + search;
+
+  function handleSearch(event) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const query = formData.get("busca")?.toString().trim() ?? "";
+    navigate(query ? `/products?busca=${encodeURIComponent(query)}` : "/products");
+  }
 
   return (
     <header className="header">
@@ -55,15 +66,29 @@ export default function Header({ qtdCarrinho = 0 }) {
         </nav>
 
         <div className="header__acoes">
-          <button type="button" className="header__icone" aria-label="Buscar">
-            <FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden="true" />
-          </button>
+          <form
+            key={searchParams.get("busca") ?? ""}
+            className="header__busca"
+            role="search"
+            onSubmit={handleSearch}
+          >
+            <input
+              type="search"
+              name="busca"
+              defaultValue={searchParams.get("busca") ?? ""}
+              placeholder="Buscar produtos"
+              aria-label="Buscar produtos pelo nome"
+            />
+            <button type="submit" className="header__icone" aria-label="Pesquisar produtos">
+              <FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden="true" />
+            </button>
+          </form>
           <Link to="/wishlist" className="header__icone" aria-label="Lista de desejos">
             <FontAwesomeIcon icon={faHeart} aria-hidden="true" />
           </Link>
-          <Link to="/cart" className="header__icone" aria-label={`Carrinho, ${qtdCarrinho} itens`}>
+          <Link to="/cart" className="header__icone" aria-label={`Carrinho, ${totalItems} itens`}>
             <FontAwesomeIcon icon={faBagShopping} aria-hidden="true" />
-            {qtdCarrinho > 0 && <span className="header__badge">{qtdCarrinho}</span>}
+            {totalItems > 0 && <span className="header__badge">{totalItems}</span>}
           </Link>
         </div>
       </div>

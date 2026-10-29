@@ -1,6 +1,8 @@
  
 .categories-section {
-  padding: 48px 24px;
+  max-width: var(--largura-conteudo);
+  margin: 0 auto;
+  padding: 36px 20px;
   background-color: #f8f4ee;
 }
 
@@ -8,23 +10,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 24px;
+  gap: 16px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .categories-heading::before,
 .categories-heading::after {
-  transform: translateY(20px);
+  transform: translateY(14px);
   content: "";
-  width: 20%;
+  width: 16%;
   height: 1px;
   background-color: #d6c7b4;
 }
 
 .categories-heading span {
   color: #777b5c;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -33,23 +35,37 @@
 
 .categories-heading h2 {
   color: #4b1724;
-  font-size: 28px;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
   font-weight: 500;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
 }
 
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px;
 }
 
 .category-card {
   position: relative;
-  height: 300px;
+  display: block;
+  height: 240px;
   overflow: hidden;
   border-radius: 8px;
   background-color: #e8dfd2;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.category-card:hover {
+  box-shadow: 0 6px 16px rgb(70 40 30 / 9%);
+  transform: translateY(-2px);
+}
+
+.category-card:focus-visible {
+  outline: 3px solid var(--oliva);
+  outline-offset: 3px;
 }
 
 .category-card img {
@@ -65,7 +81,7 @@
   left: 0;
   width: 100%;
   box-sizing: border-box;
-  padding: 20px 14px;
+  padding: 16px 12px;
   color: white;
   background: linear-gradient(
     transparent,
@@ -75,12 +91,12 @@
 
 .category-info h3 {
   margin: 0 0 6px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .category-info p {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 @media (max-width: 800px) {
@@ -91,7 +107,7 @@
 
 @media (max-width: 480px) {
   .categories-section {
-    padding: 32px 16px;
+    padding: 28px 16px;
   }
 
   .categories-heading {
@@ -109,6 +125,6 @@
   }
 
   .category-card {
-    height: 240px;
+    height: 190px;
   }
 }
