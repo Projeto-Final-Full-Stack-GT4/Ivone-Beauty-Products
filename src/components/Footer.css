@@ -1,169 +1,192 @@
 
-/* 1. Configurações gerais */
 .footer {
   width: 100%;
-  color: #f8eee2;
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--creme);
+  background: var(--vinho-escuro);
 }
 
-/* 2. Faixa superior vinho */
 .footer-top {
+  max-width: 1200px;
+  min-height: 150px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 12px 7%;
-  min-height: 70px;
-  background-color: #45151c;
-}
-
-/* 3. Marca */
-.brand {
-  display: flex;
-  align-items: center;
-  min-width: 190px;
+  gap: 2rem;
 }
 
 .brand-name {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  font-family: Georgia, serif;
-  letter-spacing: 3px;
+  flex-shrink: 0;
+  color: var(--creme);
+  font-family: var(--fonte-titulo);
+  line-height: 1;
+  text-decoration: none;
 }
 
 .brand-name span {
-  font-size: 19px;
+  font-size: 2rem;
+  letter-spacing: 0.18em;
 }
 
 .brand-name small {
-  font-family: Arial, sans-serif;
-  font-size: 7px;
-  letter-spacing: 2px;
+  margin-top: 0.35rem;
+  color: var(--bege);
+  font-family: var(--fonte-corpo);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-/* 4. Newsletter */
 .newsletter {
   flex: 1;
-  max-width: 420px;
-  padding: 0 22px;
+  max-width: 400px;
+  padding: 0 2rem;
   text-align: center;
-  border-left: 1px solid #78434a;
-  border-right: 1px solid #78434a;
+  border-right: 1px solid rgba(227, 205, 182, 0.3);
+  border-left: 1px solid rgba(227, 205, 182, 0.3);
 }
 
 .newsletter p {
-  margin: 0 0 7px;
-  font-size: 10px;
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .newsletter-form {
   display: flex;
   width: 100%;
-  max-width: 310px;
+  max-width: 340px;
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid #d4b69a;
-  border-radius: 20px;
+  border: 1px solid var(--bege);
+  border-radius: 999px;
 }
 
 .newsletter-form input {
   flex: 1;
-  width: 60%;
   min-width: 0;
-  padding: 8px 12px;
+  padding: 0.65rem 1rem;
   border: none;
   outline: none;
-  background-color: #fffaf4;
-  color: #45151c;
-  font-size: 10px;
+  background: var(--creme);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8rem;
 }
 
 .newsletter-form button {
   border: none;
-  padding: 8px 10px;
-  background-color: #45151c;
-  color: #fffaf4;
-  font-size: 8px;
-  font-weight: bold;
+  padding: 0.65rem 1rem;
+  background: var(--vinho);
+  color: var(--creme);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 0.2s ease;
 }
 
-/* 5. Redes sociais */
+.newsletter-form button:hover {
+  background: var(--vinho-escuro);
+}
+
 .social-links {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
 }
 
 .social-links a {
-  color: #f8eee2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--creme);
+  font-size: 0.8rem;
   text-decoration: none;
-  font-size: 12px;
+  transition: color 0.2s ease;
 }
 
-/* 6. Faixa inferior bege */
+.social-links a:hover {
+  color: var(--bege);
+}
+
+.social-links svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.brand-name:focus-visible,
+.social-links a:focus-visible,
+.footer-links a:focus-visible,
+.newsletter-form input:focus-visible,
+.newsletter-form button:focus-visible {
+  outline: 2px solid var(--oliva);
+  outline-offset: 3px;
+}
+
 .footer-bottom {
+  width: 100%;
+  min-height: 58px;
+  padding: 0.75rem max(calc((100% - 1200px) / 2 + 1.25rem), 1.25rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  min-height: 38px;
-  padding: 10px 5%;
-  background-color: #f3eade;
-  color: #55433c;
+  gap: 1rem;
+  background: var(--creme);
+  color: var(--texto);
 }
 
-/* 7. Links inferiores */
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0;
+  row-gap: 0.5rem;
 }
 
 .footer-links a {
-  padding: 0 10px;
-  border-right: 1px solid #d2c2b2;
-  color: #55433c;
+  padding: 0 0.75rem;
+  border-right: 1px solid #d9c9bb;
+  color: inherit;
+  font-size: 0.75rem;
   text-decoration: none;
-  font-size: 9px;
-}
-
-.footer-links a:first-child {
-  padding-left: 0;
 }
 
 .footer-links a:last-child {
   border-right: none;
 }
 
-.footer-links a:hover {
-  color: #8c4a4e;
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--vinho);
 }
 
-/* 8. Direitos autorais */
 .copyright {
   margin: 0;
-  font-size: 8px;
+  font-size: 0.7rem;
   text-align: right;
 }
 
-/* 9. Adaptação para celulares */
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   .footer-top {
     flex-direction: column;
-    padding: 24px 18px;
-    gap: 22px;
+    gap: 1.5rem;
+    padding: 2rem 1.25rem;
   }
 
   .newsletter {
     width: 100%;
-    padding: 18px 0;
-    border-left: none;
-    border-right: none;
-    border-top: 1px solid #78434a;
-    border-bottom: 1px solid #78434a;
+    max-width: 440px;
+    padding: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid rgba(227, 205, 182, 0.3);
+    border-bottom: 1px solid rgba(227, 205, 182, 0.3);
   }
 
   .social-links {
@@ -172,16 +195,33 @@
 
   .footer-bottom {
     flex-direction: column;
-    text-align: center;
-    padding: 18px 12px;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
   }
 
   .footer-links {
     justify-content: center;
-    row-gap: 12px;
   }
 
   .copyright {
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-links {
+    gap: 0.6rem 1rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-links a:first-child {
+    padding-left: 0;
+  }
+
+  .footer-links a:last-child {
+    padding-right: 0;
   }
 }
