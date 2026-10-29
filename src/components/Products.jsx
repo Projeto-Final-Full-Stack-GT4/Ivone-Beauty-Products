@@ -10,7 +10,7 @@ function Products() {
       </div>
 
       <div className="products-grid">
-        {products.map((product) => (
+        {products.slice(0, 4).map((product) => (
           <article className="product-card" key={product.id}>
             <span className="product-tag">{product.tag}</span>
 
