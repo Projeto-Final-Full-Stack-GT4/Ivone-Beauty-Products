@@ -12,6 +12,15 @@
     display: block;
 }
 
+.product-page-image .product-illustration {
+    display: grid;
+    width: 100%;
+    min-height: 360px;
+    place-items: center;
+    background-color: #f2ece2;
+    font-size: 8rem;
+}
+
 .product-page-info {
     display: flex;
     flex-direction: column;

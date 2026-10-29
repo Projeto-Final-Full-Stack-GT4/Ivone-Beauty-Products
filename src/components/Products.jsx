@@ -15,7 +15,13 @@ function Products() {
             <span className="product-tag">{product.tag}</span>
 
             <div className="product-image">
-              <img src={product.image} alt={product.name} />
+              {product.image ? (
+                <img src={product.image} alt={product.name} />
+              ) : (
+                <span className="product-illustration" role="img" aria-label={product.name}>
+                  {product.illustration}
+                </span>
+              )}
             </div>
 
             <div className="product-info">

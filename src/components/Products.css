@@ -69,6 +69,14 @@
   transition: transform 0.3s ease;
 }
 
+.product-illustration {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  font-size: clamp(3rem, 8vw, 5rem);
+}
+
 .product-card:hover .product-image img {
   transform: scale(1.12);
 }

@@ -17,7 +17,13 @@ function Product() {
 return (
     <section className="product-page">
        <div className="product-page-image">
-        <img src={product.image} alt={product.name} />
+        {product.image ? (
+          <img src={product.image} alt={product.name} />
+        ) : (
+          <span className="product-illustration" role="img" aria-label={product.name}>
+            {product.illustration}
+          </span>
+        )}
        </div>
 
        <div className="product-page-info">
