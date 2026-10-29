@@ -34,8 +34,10 @@ function Categories() {
     return (
         <section className='categories-section'>
             <div className='categories-heading'>
-                <span>Nossas Categorias</span>
-                <h2>Encontre o que combina com você</h2>
+                <div className='categories-heading-content'>
+                    <span>Nossas Categorias</span>
+                    <h2>Encontre o que combina com você</h2>
+                </div>
             </div>
 
             <div className='categories-grid'>
