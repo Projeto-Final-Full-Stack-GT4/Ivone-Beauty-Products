@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import products from '../data/products';
+import { useCart } from '../context/CartContext.js';
 import './Product.css';
 
 function Product() {
     const { id } = useParams();
+    const { addToCart } = useCart();
     const product = products.find((item) => item.id === Number(id));
 
     if (!product) {
@@ -25,7 +27,9 @@ return (
          <p className="product-page-description">{product.description}</p>
          <p className="product-page-size">{product.size}</p>
          <p className="product-page-price">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'} )}</p>
-         <button className="product-page-button">Adicionar ao carrinho</button>
+         <button className="product-page-button" type="button" onClick={() => addToCart(product)}>
+           Adicionar ao carrinho
+         </button>
        </div>
     </section>
  );

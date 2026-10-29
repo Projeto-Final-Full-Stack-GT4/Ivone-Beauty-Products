@@ -1,9 +1,12 @@
 .hero {
   display: grid;
-  grid-template-columns: 1fr minmax(320px, 520px) 1fr;
+  grid-template-columns: 1fr minmax(280px, 440px) 1fr;
   align-items: center;
-  min-height: clamp(380px, 32vw, 520px);
+  min-height: clamp(300px, 28vw, 420px);
+  max-width: var(--largura-conteudo);
+  margin: 0 auto;
   overflow: hidden;
+  border-radius: 0 0 10px 10px;
   background: linear-gradient(
     100deg,
     #c9a98a 0%,
@@ -38,21 +41,21 @@
 }
 
 .hero__texto {
-  padding: 2rem 0.5rem;
+  padding: 1.5rem 0.5rem;
 }
 
 .hero__marca {
-  margin: 0 0 1.25rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  margin: 0 0 0.9rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .hero__titulo {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.9rem;
   color: var(--vinho);
   font-family: var(--fonte-titulo);
-  font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+  font-size: clamp(2.2rem, 4.6vw, 3.7rem);
   font-weight: 500;
   line-height: 1;
 }
@@ -64,20 +67,20 @@
 
 .hero__sub {
   max-width: 36ch;
-  margin: 0 0 1.75rem;
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  margin: 0 0 1.25rem;
+  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
   line-height: 1.55;
 }
 
 .hero__btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.9rem;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
   border-radius: 999px;
   background: var(--vinho);
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-decoration: none;
@@ -95,8 +98,8 @@
 }
 
 .hero__btn svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 @media (max-width: 900px) {
@@ -109,7 +112,7 @@
 
   .hero__texto {
     grid-area: texto;
-    padding: 2.5rem 1.5rem 1rem;
+    padding: 2rem 1.25rem 0.75rem;
     text-align: center;
   }
 
@@ -120,12 +123,12 @@
 
   .hero__img--modelo {
     grid-area: modelo;
-    height: 220px;
+    height: 180px;
   }
 
   .hero__img--produtos {
     grid-area: produtos;
-    height: 220px;
+    height: 180px;
   }
 }
 

@@ -1,8 +1,8 @@
 .beneficios {
   list-style: none;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem;
-  max-width: 1200px;
+  padding: 1.1rem 1.25rem;
+  max-width: var(--largura-conteudo);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
 }
@@ -11,18 +11,18 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0.25rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.82rem;
   line-height: 1.35;
 }
 .beneficios__item + .beneficios__item {
   border-left: 1px solid #d9c9bb;
 }
 .beneficios__item svg {
-  width: 28px;
-  height: 28px;
+  width: 23px;
+  height: 23px;
   color: var(--oliva);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 @media (max-width: 900px) {

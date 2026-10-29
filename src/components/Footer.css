@@ -6,14 +6,14 @@
 }
 
 .footer-top {
-  max-width: 1200px;
-  min-height: 150px;
+  max-width: var(--largura-conteudo);
+  min-height: 120px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem;
+  padding: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .brand-name {
@@ -27,7 +27,7 @@
 }
 
 .brand-name span {
-  font-size: 2rem;
+  font-size: 1.75rem;
   letter-spacing: 0.18em;
 }
 
@@ -43,8 +43,8 @@
 
 .newsletter {
   flex: 1;
-  max-width: 400px;
-  padding: 0 2rem;
+  max-width: 360px;
+  padding: 0 1.5rem;
   text-align: center;
   border-right: 1px solid rgba(227, 205, 182, 0.3);
   border-left: 1px solid rgba(227, 205, 182, 0.3);
@@ -52,14 +52,14 @@
 
 .newsletter p {
   margin: 0 0 0.75rem;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   line-height: 1.4;
 }
 
 .newsletter-form {
   display: flex;
   width: 100%;
-  max-width: 340px;
+  max-width: 320px;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid var(--bege);
@@ -69,7 +69,7 @@
 .newsletter-form input {
   flex: 1;
   min-width: 0;
-  padding: 0.65rem 1rem;
+  padding: 0.55rem 0.8rem;
   border: none;
   outline: none;
   background: var(--creme);
@@ -80,11 +80,11 @@
 
 .newsletter-form button {
   border: none;
-  padding: 0.65rem 1rem;
+  padding: 0.55rem 0.8rem;
   background: var(--vinho);
   color: var(--creme);
   font: inherit;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -134,8 +134,8 @@
 
 .footer-bottom {
   width: 100%;
-  min-height: 58px;
-  padding: 0.75rem max(calc((100% - 1200px) / 2 + 1.25rem), 1.25rem);
+  min-height: 52px;
+  padding: 0.65rem max(calc((100% - var(--largura-conteudo)) / 2 + 1.25rem), 1.25rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -154,7 +154,7 @@
   padding: 0 0.75rem;
   border-right: 1px solid #d9c9bb;
   color: inherit;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-decoration: none;
 }
 
@@ -169,21 +169,21 @@
 
 .copyright {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-align: right;
 }
 
 @media (max-width: 960px) {
   .footer-top {
     flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem 1.25rem;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
   }
 
   .newsletter {
     width: 100%;
     max-width: 440px;
-    padding: 1.5rem 0;
+    padding: 1.1rem 0;
     border: 0;
     border-top: 1px solid rgba(227, 205, 182, 0.3);
     border-bottom: 1px solid rgba(227, 205, 182, 0.3);
