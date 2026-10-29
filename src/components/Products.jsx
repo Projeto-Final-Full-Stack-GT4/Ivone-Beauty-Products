@@ -10,12 +10,18 @@ function Products() {
       </div>
 
       <div className="products-grid">
-        {products.map((product) => (
+        {products.slice(0, 4).map((product) => (
           <article className="product-card" key={product.id}>
             <span className="product-tag">{product.tag}</span>
 
             <div className="product-image">
-              <img src={product.image} alt={product.name} />
+              {product.image ? (
+                <img src={product.image} alt={product.name} />
+              ) : (
+                <span className="product-illustration" role="img" aria-label={product.name}>
+                  {product.illustration}
+                </span>
+              )}
             </div>
 
             <div className="product-info">

@@ -55,12 +55,19 @@
 }
 
 .product-image {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  background-color: var(--product-background);
-  overflow: hidden;
+  height: 125px;
+  aspect-ratio: auto;
+  padding: 0;
 }
 
+.product-image img {
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.product-illustration {
+  font-size: 3.5rem;
+}
 .product-image img {
   width: 100%;
   height: 100%;
@@ -68,6 +75,21 @@
   display: block;
   transition: transform 0.3s ease;
 }
+
+.product-illustration {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  font-size: clamp(3rem, 8vw, 5rem);
+  background: linear-gradient(135deg, #fff4ed, #f2ece2);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-illustration {
+  transform: scale(1.08);
+}
+
 
 .product-card:hover .product-image img {
   transform: scale(1.12);
