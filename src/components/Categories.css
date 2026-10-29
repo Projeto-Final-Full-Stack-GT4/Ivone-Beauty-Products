@@ -1,0 +1,130 @@
+ 
+.categories-section {
+  max-width: var(--largura-conteudo);
+  margin: 0 auto;
+  padding: 36px 20px;
+  background-color: #f8f4ee;
+}
+
+.categories-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.categories-heading::before,
+.categories-heading::after {
+  transform: translateY(14px);
+  content: "";
+  width: 16%;
+  height: 1px;
+  background-color: #d6c7b4;
+}
+
+.categories-heading span {
+  color: #777b5c;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.categories-heading h2 {
+  color: #4b1724;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 500;
+  margin: 8px 0 0;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.category-card {
+  position: relative;
+  display: block;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #e8dfd2;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.category-card:hover {
+  box-shadow: 0 6px 16px rgb(70 40 30 / 9%);
+  transform: translateY(-2px);
+}
+
+.category-card:focus-visible {
+  outline: 3px solid var(--oliva);
+  outline-offset: 3px;
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.category-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 12px;
+  color: white;
+  background: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.75)
+  );
+}
+
+.category-info h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.category-info p {
+  margin: 0;
+  font-size: 11px;
+}
+
+@media (max-width: 800px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-section {
+    padding: 28px 16px;
+  }
+
+  .categories-heading {
+    gap: 10px;
+  }
+
+  .categories-heading::before,
+  .categories-heading::after {
+    width: 12%;
+  }
+
+  .categories-heading span {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .category-card {
+    height: 190px;
+  }
+}

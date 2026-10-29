@@ -1,0 +1,227 @@
+
+.footer {
+  width: 100%;
+  color: var(--creme);
+  background: var(--vinho-escuro);
+}
+
+.footer-top {
+  max-width: var(--largura-conteudo);
+  min-height: 120px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: var(--creme);
+  font-family: var(--fonte-titulo);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand-name span {
+  font-size: 1.75rem;
+  letter-spacing: 0.18em;
+}
+
+.brand-name small {
+  margin-top: 0.35rem;
+  color: var(--bege);
+  font-family: var(--fonte-corpo);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.newsletter {
+  flex: 1;
+  max-width: 360px;
+  padding: 0 1.5rem;
+  text-align: center;
+  border-right: 1px solid rgba(227, 205, 182, 0.3);
+  border-left: 1px solid rgba(227, 205, 182, 0.3);
+}
+
+.newsletter p {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.newsletter-form {
+  display: flex;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--bege);
+  border-radius: 999px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55rem 0.8rem;
+  border: none;
+  outline: none;
+  background: var(--creme);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.newsletter-form button {
+  border: none;
+  padding: 0.55rem 0.8rem;
+  background: var(--vinho);
+  color: var(--creme);
+  font: inherit;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.newsletter-form button:hover {
+  background: var(--vinho-escuro);
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--creme);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+  color: var(--bege);
+}
+
+.social-links svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.brand-name:focus-visible,
+.social-links a:focus-visible,
+.footer-links a:focus-visible,
+.newsletter-form input:focus-visible,
+.newsletter-form button:focus-visible {
+  outline: 2px solid var(--oliva);
+  outline-offset: 3px;
+}
+
+.footer-bottom {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.65rem max(calc((100% - var(--largura-conteudo)) / 2 + 1.25rem), 1.25rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--creme);
+  color: var(--texto);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+}
+
+.footer-links a {
+  padding: 0 0.75rem;
+  border-right: 1px solid #d9c9bb;
+  color: inherit;
+  font-size: 0.7rem;
+  text-decoration: none;
+}
+
+.footer-links a:last-child {
+  border-right: none;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--vinho);
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.65rem;
+  text-align: right;
+}
+
+@media (max-width: 960px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .newsletter {
+    width: 100%;
+    max-width: 440px;
+    padding: 1.1rem 0;
+    border: 0;
+    border-top: 1px solid rgba(227, 205, 182, 0.3);
+    border-bottom: 1px solid rgba(227, 205, 182, 0.3);
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-links {
+    gap: 0.6rem 1rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-links a:first-child {
+    padding-left: 0;
+  }
+
+  .footer-links a:last-child {
+    padding-right: 0;
+  }
+}

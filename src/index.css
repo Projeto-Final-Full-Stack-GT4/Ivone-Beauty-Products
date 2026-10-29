@@ -7,15 +7,52 @@
   --bege: #e3cdb6;
   --oliva: #5f7a54;
   --texto: #3b2a2a;
+  --texto-suave: #746864;
+  --superficie: #fffdfa;
+  --borda: #e9e1d8;
+  --largura-conteudo: 1120px;
   --fonte-titulo: "Cormorant Garamond", Georgia, serif;
   --fonte-corpo: "Jost", system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: var(--fonte-corpo);
   color: var(--texto);
   background: var(--creme);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+.site-main {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
