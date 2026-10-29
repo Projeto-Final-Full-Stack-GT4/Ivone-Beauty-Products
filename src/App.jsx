@@ -15,6 +15,7 @@ import { WishlistProvider } from './context/WishlistProvider.jsx';
 
 function App() {
   return (
+    <WishlistProvider>
     <BrowserRouter>
       <CartProvider>
         <WishlistProvider>
@@ -35,6 +36,8 @@ function App() {
         </WishlistProvider>
       </CartProvider>
     </BrowserRouter>
+    </WishlistProvider>
+
   );
 }
 

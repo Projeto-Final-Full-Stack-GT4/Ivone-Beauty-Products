@@ -130,6 +130,21 @@
   transition: transform 0.25s ease;
 }
 
+.product-illustration {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  font-size: clamp(3rem, 8vw, 5rem);
+  background: linear-gradient(135deg, #fff4ed, #f2ece2);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-illustration {
+  transform: scale(1.08);
+}
+
+
 .product-card:hover .product-image img {
   transform: scale(1.04);
 }
