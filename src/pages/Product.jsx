@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import products from '../data/products';
+import './Product.css';
 
 function Product() {
     const { id } = useParams();
@@ -14,12 +15,18 @@ function Product() {
     }
 
 return (
-    <section>
-       <img src={product.image} alt={product.name} />
-       <h1>{product.name}</h1>
-       <p>{product.size}</p>
-       <p>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'} )}</p>
-       <button>Adicionar ao carrinho</button>
+    <section className="product-page">
+       <div className="product-page-image">
+        <img src={product.image} alt={product.name} />
+       </div>
+
+       <div className="product-page-info">
+         <h1>{product.name}</h1>
+         <p className="product-page-description">{product.description}</p>
+         <p className="product-page-size">{product.size}</p>
+         <p className="product-page-price">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'} )}</p>
+         <button className="product-page-button">Adicionar ao carrinho</button>
+       </div>
     </section>
  );
 }
