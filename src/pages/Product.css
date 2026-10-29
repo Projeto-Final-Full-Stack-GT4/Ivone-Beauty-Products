@@ -25,6 +25,13 @@
     color: #4a1a2c;
 }
 
+.product-page-description {
+    margin: 0;
+    line-height: 1.6;
+    color: #6f5f58;
+    max-width: 480px;
+}
+
 .product-page-size {
     margin: 0;
     color: #6f5f58;
