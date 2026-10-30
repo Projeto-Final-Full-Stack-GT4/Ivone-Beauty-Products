@@ -1,0 +1,109 @@
+.user-register {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 3.5rem;
+}
+
+.user-register__card {
+  width: min(100%, 30rem);
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.6rem 2rem rgb(78 23 39 / 6%);
+}
+
+.user-register__eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--vinho);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.user-register__title {
+  margin: 0;
+  color: var(--vinho-escuro);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 500;
+  text-align: center;
+}
+
+.user-register__description {
+  margin: 0.5rem 0 1.5rem;
+  color: var(--texto);
+  text-align: center;
+}
+
+.user-register__form {
+  display: grid;
+  gap: 1rem;
+}
+
+.user-register__field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.user-register__field label {
+  color: var(--texto);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.user-register__field input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.75rem;
+  color: var(--texto);
+  background: #fff;
+  border: 1px solid #cbb8aa;
+  border-radius: 0.35rem;
+  font: inherit;
+}
+
+.user-register__field input:focus {
+  border-color: var(--vinho);
+  outline: 2px solid rgb(78 23 39 / 18%);
+  outline-offset: 1px;
+}
+
+.user-register__field small {
+  color: #665756;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.user-register__submit {
+  min-height: 2.85rem;
+  margin-top: 0.4rem;
+  color: #fff;
+  background: var(--vinho);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s ease;
+}
+
+.user-register__submit:hover {
+  background: var(--vinho-escuro);
+}
+
+.user-register__submit:focus-visible {
+  outline: 3px solid var(--bege);
+  outline-offset: 3px;
+}
+
+.user-register__status {
+  margin: 0;
+  color: var(--vinho-escuro);
+  font-size: 0.9rem;
+  text-align: center;
+}

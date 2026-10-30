@@ -1,91 +1,59 @@
- import './Products.css';
- import serumImage from '../assets/products/serum_facial.png';
- import gelImage from '../assets/products/Gel_de_Limpeza.png';
- import poCompacto from '../assets/products/po_compacto.jpeg';
-import batomHidratante from '../assets/products/batom.jpeg';
 
+import './Products.css';
+import products from '../data/products';
+import { useCart } from '../context/CartContext.js';
+import { useWishlist } from '../context/WishlistContext.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
+function Products() {
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
+  return (
+    <section className="products-section">
+      <div className="products-heading">
+        <span>PRODUTOS EM DESTAQUE</span>
+      </div>
 
- const products = [
-    {
-    id: 1,
-    name: 'Sérum Facial Revitalizante',
-    size: '30ml',
-    price: 89.90,
-    tag: 'Mais vendido',
-    image: serumImage,
+      <div className="products-grid">
+        {products.slice(0, 8).map((product) => (
+          <article className="product-card" key={product.id}>
+            <span className="product-tag">{product.tag}</span>
+            <button
+              className={`product-wishlist${isInWishlist(product.id) ? ' product-wishlist--active' : ''}`}
+              type="button"
+              onClick={() => toggleWishlist(product)}
+              aria-label={`${isInWishlist(product.id) ? 'Remover' : 'Adicionar'} ${product.name} ${isInWishlist(product.id) ? 'da' : 'à'} lista de desejos`}
+              aria-pressed={isInWishlist(product.id)}
+            >
+              <FontAwesomeIcon icon={faHeart} aria-hidden="true" />
+            </button>
 
-    },
+            <div className="product-image">
+              <img src={product.image} alt={product.name} />
+            </div>
 
-    {
-      id: 2,
-      name: 'Gel de Limpeza Facial',
-      size: '120ml',
-      price: 49.90,
-      tag: 'Vegano',
-      image: gelImage,
+            <div className="product-info">
+              <h3>{product.name}</h3>
+              <p className="product-size">{product.size}</p>
+            </div>
 
-    },
+            <p className="product-price">
+              {product.price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </p>
 
-    {
-      id: 3,
-      name: 'Pó Compacto Matte',
-      size: '10g',
-      price: 69.90,
-      tag: 'Lançamento',
-      image: poCompacto,
+            <button className="add-to-cart" type="button" onClick={() => addToCart(product)}>
+              Adicionar ao carrinho
+            </button>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-    },
-
-    {
-      id: 4,
-      name: 'Batom Hidradante',
-      size: '4g',
-      price: 59.90,
-      tag: 'Mais Vendido',
-      image: batomHidratante,
-    },
-
- ];
-
- function Products() {
-   return (
-      <section className="products-section">
-         <div className="products-heading">
-            <span>PRODUTOS EM DESTAQUE</span>
-         </div>  
-
-         <div className='products-grid'>
-            {products.map((product) => 
-            <article className="product-card" key={product.id}>
-               <span className="product-tag">{product.tag}</span>
-
-               <div className="product-image">
-                  <img src={product.image} alt={product.name}/>
-               </div>
-
-               <div className="product-info">
-                  <h3>{product.name}</h3>
-                  <p className="product-size">{product.size}</p>
-               </div>
-
-               <p className="product-price">
-                  {product.price.toLocaleString('pt-BR', {
-                     style: 'currency',
-                     currency: 'BRL',
-                  })}
-               </p>
-
-               <button className="add-to-cart">
-                  Adicionar ao carrinho
-               </button>
-            </article> 
-            )}
-         </div>
-      </section>  
-   )
-
- }
-
- export default Products;
+export default Products;
