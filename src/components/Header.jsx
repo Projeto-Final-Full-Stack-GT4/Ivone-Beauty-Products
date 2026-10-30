@@ -3,6 +3,7 @@ import { faHeart, faMagnifyingGlass, faBagShopping, faTruck, faUser } from "@for
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useCart } from "../context/CartContext.js";
+import { useAuth } from "../context/AuthContext.js";
 import "./Header.css";
 
 // Edite aqui os links do menu (to = rota)
@@ -20,6 +21,7 @@ export default function Header() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { totalItems } = useCart();
+  const { user } = useAuth();
   const atual = pathname + search;
 
   function handleSearch(event) {
@@ -43,7 +45,10 @@ export default function Header() {
               <FontAwesomeIcon icon={faWhatsapp} aria-hidden="true" />
               Atendimento
             </a>
-            <Link to="/login" className="header__topo-item">
+            <Link
+              to={user ? "/dados-pessoais" : "/login"}
+              className="header__topo-item"
+            >
               <FontAwesomeIcon icon={faUser} aria-hidden="true" />
               Minha conta
             </Link>
