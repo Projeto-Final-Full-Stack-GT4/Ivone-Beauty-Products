@@ -6,6 +6,7 @@ import { useWishlist } from '../context/WishlistContext.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchProducts } from '../services/api.js';
+import React from 'react';
 
 function Products() {
   const { addToCart } = useCart();

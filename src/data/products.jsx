@@ -14,6 +14,16 @@ const products = [
     price: 89.9,
     tag: "Mais Vendido",
     image: serumImage,
+    reviews: [
+      {
+        id: 101,
+        user: "Mariana Silva",
+        rating: 5,
+        date: "12/11/2026",
+        comment:
+          "Deixou minha pele iluminada e hidratada sem pesar. Uso todos os dias pela manhã!",
+      },
+    ],
   },
   {
     id: 2,
@@ -25,6 +35,16 @@ const products = [
     price: 49.9,
     tag: "Vegano",
     image: gelImage,
+    reviews: [
+      {
+        id: 201,
+        user: "Carlos Mendes",
+        rating: 4,
+        date: "05/10/2026",
+        comment:
+          "Gel de limpeza eficaz, mas pode ser um pouco seco para peles muito sensíveis.",
+      },
+    ],
   },
   {
     id: 3,
@@ -36,6 +56,15 @@ const products = [
     price: 69.9,
     tag: "Lançamento",
     image: poCompacto,
+    reviews: [
+      {
+        id: 301,
+        user: "Ana Paula",
+        rating: 5,
+        date: "20/11/2026",
+        comment: "Adorei o acabamento matte e a longevidade do pó compacto!",
+      },
+    ],
   },
   {
     id: 4,
@@ -47,6 +76,15 @@ const products = [
     price: 59.9,
     tag: "Mais Vendido",
     image: batomHidratante,
+    reviews: [
+      {
+        id: 401,
+        user: "Juliana Costa",
+        rating: 4,
+        date: "15/12/2026",
+        comment: "Batom hidratante e de fácil aplicação. Recomendo!",
+      },
+    ],
   },
   {
     id: 5,
@@ -58,6 +96,16 @@ const products = [
     price: 79.9,
     tag: "Destaque",
     image: serumImage,
+    reviews: [
+      {
+        id: 501,
+        user: "Roberta Santos",
+        rating: 5,
+        date: "10/11/2026",
+        comment:
+          "Sérum facial com vitamina C é incrível! Deixou minha pele mais clara e radiante.",
+      },
+    ],
   },
   {
     id: 6,
@@ -69,6 +117,16 @@ const products = [
     price: 44.9,
     tag: "Uso Diário",
     image: gelImage,
+    reviews: [
+      {
+        id: 601,
+        user: "Fernanda Lima",
+        rating: 4,
+        date: "22/11/2026",
+        comment:
+          "Gel de limpeza suave, ideal para o uso diário. Minha pele ficou limpa e fresca.",
+      },
+    ],
   },
   {
     id: 7,
@@ -80,6 +138,16 @@ const products = [
     price: 94.9,
     tag: "Novidade",
     image: serumImage,
+    reviews: [
+      {
+        id: 701,
+        user: "Patrícia Oliveira",
+        rating: 5,
+        date: "30/11/2026",
+        comment:
+          "Sérum facial noturno é excelente! Deixou minha pele hidratada e renovada.",
+      },
+    ],
   },
   {
     id: 8,
@@ -91,6 +159,16 @@ const products = [
     price: 39.9,
     tag: "Favorito",
     image: gelImage,
+    reviews: [
+      {
+        id: 801,
+        user: "Marcos Almeida",
+        rating: 4,
+        date: "18/12/2026",
+        comment:
+          "Gel de limpeza purificante, ideal para peles oleosas. Deixou minha pele limpa e com sensação de frescor.",
+      },
+    ],
   },
   {
     id: 9,
@@ -102,6 +180,16 @@ const products = [
     price: 64.9,
     tag: "Essencial",
     image: poCompacto,
+    reviews: [
+      {
+        id: 901,
+        user: "Camila Rodrigues",
+        rating: 5,
+        date: "25/12/2026",
+        comment:
+          "Pó compacto natural é ótimo! Deixou minha pele com um acabamento perfeito.",
+      },
+    ],
   },
   {
     id: 10,
@@ -113,6 +201,15 @@ const products = [
     price: 54.9,
     tag: "Clássico",
     image: batomHidratante,
+    reviews: [
+      {
+        id: 1001,
+        user: "Juliana Souza",
+        rating: 4,
+        date: "02/01/2027",
+        comment: "Batom nude cremoso é ótimo para um look natural e elegante.",
+      },
+    ],
   },
   {
     id: 11,
@@ -124,6 +221,15 @@ const products = [
     price: 57.9,
     tag: "Destaque",
     image: batomHidratante,
+    reviews: [
+      {
+        id: 1101,
+        user: "Letícia Moreira",
+        rating: 5,
+        date: "08/01/2027",
+        comment: "Cor intensa, confortável de usar e muito bonita no rosto!",
+      },
+    ],
   },
   {
     id: 12,
@@ -135,6 +241,15 @@ const products = [
     price: 72.9,
     tag: "Novidade",
     image: poCompacto,
+    reviews: [
+      {
+        id: 1201,
+        user: "Renata Alves",
+        rating: 5,
+        date: "11/01/2027",
+        comment: "Acabamento muito bonito e leve, ideal para o dia a dia.",
+      },
+    ],
   },
   {
     id: 13,
@@ -146,6 +261,15 @@ const products = [
     price: 59.9,
     tag: "Clássico",
     image: batomHidratante,
+    reviews: [
+      {
+        id: 1301,
+        user: "Isabela Ramos",
+        rating: 5,
+        date: "14/01/2027",
+        comment: "Tom sofisticado e excelente pigmentação. Adorei!",
+      },
+    ],
   },
   {
     id: 14,
@@ -157,6 +281,15 @@ const products = [
     price: 74.9,
     tag: "Hidratação",
     image: serumImage,
+    reviews: [
+      {
+        id: 1401,
+        user: "Nina Martins",
+        rating: 4,
+        date: "18/01/2027",
+        comment: "Hidrata bem sem deixar a pele oleosa. Ótimo para rotina diária.",
+      },
+    ],
   },
   {
     id: 15,
@@ -168,6 +301,15 @@ const products = [
     price: 47.9,
     tag: "Essencial",
     image: gelImage,
+    reviews: [
+      {
+        id: 1501,
+        user: "Larissa Costa",
+        rating: 4,
+        date: "21/01/2027",
+        comment: "Limpeza suave e agradável, sem sensação de ressecamento.",
+      },
+    ],
   },
   {
     id: 16,
@@ -179,6 +321,15 @@ const products = [
     price: 119.9,
     tag: "Kit Especial",
     image: serumImage,
+    reviews: [
+      {
+        id: 1601,
+        user: "Talita Mendonça",
+        rating: 5,
+        date: "24/01/2027",
+        comment: "Perfeito para quem quer uma rotina facial completa e prática.",
+      },
+    ],
   },
   {
     id: 17,
@@ -190,6 +341,15 @@ const products = [
     price: 109.9,
     tag: "Kit Especial",
     image: poCompacto,
+    reviews: [
+      {
+        id: 1701,
+        user: "Beatriz Nunes",
+        rating: 5,
+        date: "27/01/2027",
+        comment: "Muito útil para montar uma maquiagem rápida e bonita.",
+      },
+    ],
   },
   {
     id: 18,
@@ -201,6 +361,15 @@ const products = [
     price: 149.9,
     tag: "Presente",
     image: batomHidratante,
+    reviews: [
+      {
+        id: 1801,
+        user: "Amanda Freitas",
+        rating: 5,
+        date: "29/01/2027",
+        comment: "Ideia incrível de presente, muito bonito e funcional.",
+      },
+    ],
   },
   {
     id: 19,
@@ -212,6 +381,15 @@ const products = [
     price: 99.9,
     tag: "Mais Vendido",
     image: gelImage,
+    reviews: [
+      {
+        id: 1901,
+        user: "Gabriela Reis",
+        rating: 5,
+        date: "02/02/2027",
+        comment: "Ótimo para quem está começando a cuidar da pele.",
+      },
+    ],
   },
   {
     id: 20,
@@ -223,6 +401,15 @@ const products = [
     price: 139.9,
     tag: "Especial",
     image: serumImage,
+    reviews: [
+      {
+        id: 2001,
+        user: "Carolina Dias",
+        rating: 4,
+        date: "05/02/2027",
+        comment: "Uma boa seleção para momentos de autocuidado e relaxamento.",
+      },
+    ],
   },
 ];
 

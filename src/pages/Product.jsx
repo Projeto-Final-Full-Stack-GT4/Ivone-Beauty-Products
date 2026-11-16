@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext.js';
 import { fetchProductById } from '../services/api.js';
+import { ProductReviews } from '../components/produtos.reviews.jsx';
 import './Product.css';
 
 function Product() {
@@ -71,6 +72,16 @@ function Product() {
           Adicionar ao carrinho
         </button>
       </div>
+       <div className="product-page-info">
+         <h1>{product.name}</h1>
+         <p className="product-page-description">{product.description}</p>
+         <p className="product-page-size">{product.size}</p>
+         <p className="product-page-price">{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'} )}</p>
+         <button className="product-page-button" type="button" onClick={() => addToCart(product)}>
+           Adicionar ao carrinho
+         </button>
+       </div>
+       <ProductReviews reviews={product.reviews} />
     </section>
   );
 }
