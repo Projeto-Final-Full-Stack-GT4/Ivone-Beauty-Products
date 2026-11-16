@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import products from '../data/products';
 import { WishlistContext } from './WishlistContext.jsx';
 
 const STORAGE_KEY = 'ivone-wishlist';
@@ -16,9 +15,7 @@ function readWishlist() {
       throw new Error('Os dados salvos na wishlist não são uma lista.');
     }
 
-    return [...new Set(parsedWishlist.filter((id) =>
-      Number.isInteger(id) && products.some((product) => product.id === id)
-    ))];
+    return parsedWishlist.filter((product) => product && Number.isInteger(product.id) && product.id > 0);
   } catch (error) {
     console.error('Não foi possível carregar a wishlist salva.', error);
     return [];
@@ -26,30 +23,29 @@ function readWishlist() {
 }
 
 export function WishlistProvider({ children }) {
-  const [productIds, setProductIds] = useState(readWishlist);
+  const [items, setItems] = useState(readWishlist);
 
   useEffect(() => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(productIds));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch (error) {
       console.error('Não foi possível salvar a wishlist no armazenamento local.', error);
     }
-  }, [productIds]);
-
-  const items = productIds
-    .map((id) => products.find((product) => product.id === id))
-    .filter(Boolean);
+  }, [items]);
 
   function toggleWishlist(product) {
-    setProductIds((currentIds) =>
-      currentIds.includes(product.id)
-        ? currentIds.filter((id) => id !== product.id)
-        : [...currentIds, product.id]
-    );
+    setItems((currentItems) => {
+      const exists = currentItems.some((item) => item.id === product.id);
+      if (exists) {
+        return currentItems.filter((item) => item.id !== product.id);
+      }
+
+      return [...currentItems, { ...product, id: Number(product.id) }];
+    });
   }
 
   function isInWishlist(productId) {
-    return productIds.includes(productId);
+    return items.some((item) => item.id === productId);
   }
 
   return (

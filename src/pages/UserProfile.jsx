@@ -15,29 +15,29 @@ export default function UserProfile() {
     navigate("/login", { replace: true });
   }
 
+  const nomeCompleto = user.nome || "Usuário";
+
   return (
     <section className="account-page">
       <div className="account-card">
         <h1>Dados pessoais</h1>
         <p className="account-card__description">
-          Olá, {user.firstName} {user.lastName}
+          Olá, {nomeCompleto}
         </p>
 
         <div className="account-details">
           <p>
-            <strong>Nome:</strong> {user.firstName} {user.lastName}
-          </p>
-          <p>
-            <strong>Usuário:</strong> {user.username}
+            <strong>Nome:</strong> {nomeCompleto}
           </p>
           <p>
             <strong>E-mail:</strong> {user.email}
           </p>
-          {user.phone && (
-            <p>
-              <strong>Telefone:</strong> {user.phone}
-            </p>
-          )}
+          <p>
+            <strong>CPF:</strong> {user.cpf || "Não informado"}
+          </p>
+          <p>
+            <strong>Perfil:</strong> {user.role || "cliente"}
+          </p>
         </div>
 
         <button

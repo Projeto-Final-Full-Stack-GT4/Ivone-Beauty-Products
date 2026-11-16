@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { CartContext } from "./CartContext.js";
-import products from "../data/products";
 
 const STORAGE_KEY = "ivone-cart";
 
@@ -17,8 +16,9 @@ function readCart() {
     }
 
     return parsedCart.filter((item) => {
-      const productExists = products.some((product) => product.id === item.id);
-      return productExists && Number.isInteger(item.quantity) && item.quantity > 0;
+      const hasProductData = item && Number.isInteger(item.id) && item.id > 0;
+      const hasQuantity = Number.isInteger(item.quantity) && item.quantity > 0;
+      return hasProductData && hasQuantity;
     });
   } catch (error) {
     console.error("Não foi possível carregar o carrinho salvo.", error);
@@ -37,8 +37,9 @@ export function CartProvider({ children }) {
     }
   }, [cart]);
 
-  const items = cart.map(({ id, quantity }) => ({
-    ...products.find((product) => product.id === id),
+  const items = cart.map(({ id, quantity, ...product }) => ({
+    ...product,
+    id,
     quantity,
   }));
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
@@ -48,11 +49,11 @@ export function CartProvider({ children }) {
       const existingItem = currentCart.find((item) => item.id === product.id);
       if (existingItem) {
         return currentCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id ? { ...item, ...product, quantity: item.quantity + 1 } : item
         );
       }
 
-      return [...currentCart, { id: product.id, quantity: 1 }];
+      return [...currentCart, { ...product, id: product.id, quantity: 1 }];
     });
   }
 
@@ -60,9 +61,11 @@ export function CartProvider({ children }) {
     if (!Number.isInteger(quantity) || quantity < 1) return;
 
     setCart((currentCart) =>
-      currentCart.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
+      currentCart
+        .map((item) =>
+          item.id === productId ? { ...item, quantity } : item
+        )
+        .filter((item) => item.quantity > 0)
     );
   }
 

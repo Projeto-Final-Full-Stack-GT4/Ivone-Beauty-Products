@@ -6,7 +6,7 @@ import "./Account.css";
 export default function UserLogin() {
   const { user, login } = useAuth();
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +21,7 @@ export default function UserLogin() {
     setIsSubmitting(true);
 
     try {
-      await login(username.trim(), password);
+      await login(email.trim().toLowerCase(), password);
       navigate("/dados-pessoais", { replace: true });
     } catch (loginError) {
       setError(
@@ -44,13 +44,14 @@ export default function UserLogin() {
 
         <form className="account-form" onSubmit={handleSubmit}>
           <div className="account-form__field">
-            <label htmlFor="login-username">Nome de usuário</label>
+            <label htmlFor="login-email">E-mail</label>
             <input
-              id="login-username"
-              name="username"
-              autoComplete="username"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              id="login-email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               required
             />
           </div>
