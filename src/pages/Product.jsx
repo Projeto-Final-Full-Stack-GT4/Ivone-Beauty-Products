@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import products from '../data/products';
 import { useCart } from '../context/CartContext.js';
+import { ProductReviews } from '../components/produtos.reviews.jsx';
 import './Product.css';
 
 function Product() {
@@ -31,6 +32,7 @@ return (
            Adicionar ao carrinho
          </button>
        </div>
+       <ProductReviews reviews={product.reviews} />
     </section>
  );
 }
