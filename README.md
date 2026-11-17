@@ -11,6 +11,8 @@ Requisitos: Node.js e MySQL.
 
 O exemplo configura o frontend para consumir a API local. Esta configuração é voltada à demonstração em sala; não contém credenciais válidas de produção.
 
+A navegação por categorias e os filtros do catálogo usam as categorias retornadas pela API. No painel `/admin`, administradores podem cadastrar e definir a visibilidade das categorias e associá-las aos produtos.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
