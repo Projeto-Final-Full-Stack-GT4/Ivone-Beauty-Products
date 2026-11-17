@@ -13,6 +13,10 @@ O exemplo configura o frontend para consumir a API local. Esta configuração é
 
 A navegação por categorias e os filtros do catálogo usam as categorias retornadas pela API. No painel `/admin`, administradores podem cadastrar e definir a visibilidade das categorias e associá-las aos produtos.
 
+## Testes E2E do frontend
+
+Na pasta `Ivone-Beauty-Products`, execute `npm run test:e2e`. O comando inicia o Vite em uma porta dedicada, roda os testes Cypress com respostas de API controladas e exige no mínimo 70% de cobertura em linhas, funções, branches e statements. O relatório HTML fica em `coverage/index.html`. Para abrir o Cypress interativo com o servidor iniciado, use `npm run cy:open`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
