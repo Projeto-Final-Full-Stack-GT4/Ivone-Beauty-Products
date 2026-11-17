@@ -7,7 +7,7 @@ import './Product.css';
 
 function Product() {
   const { id } = useParams();
-  const { addToCart } = useCart();
+  const { addToCart, canAddToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -68,8 +68,17 @@ function Product() {
         <p className="product-page-price">
           {product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
         </p>
-        <button className="product-page-button" type="button" onClick={() => addToCart(product)}>
-          Adicionar ao carrinho
+        <button
+          className="product-page-button"
+          type="button"
+          onClick={() => addToCart(product)}
+          disabled={!canAddToCart(product)}
+        >
+          {Number(product.estoque) === 0
+            ? 'Sem estoque'
+            : canAddToCart(product)
+              ? 'Adicionar ao carrinho'
+              : 'Limite no carrinho'}
         </button>
       </div>
 

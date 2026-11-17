@@ -99,10 +99,17 @@ function ViewCart() {
                       type="button"
                       aria-label={`Aumentar quantidade de ${item.name}`}
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      disabled={
+                        Number.isSafeInteger(Number(item.estoque)) &&
+                        item.quantity >= Number(item.estoque)
+                      }
                     >
                       +
                     </button>
                   </div>
+                  {Number.isSafeInteger(Number(item.estoque)) && (
+                    <small>Estoque disponível: {item.estoque}</small>
+                  )}
                   <button
                     type="button"
                     className="cart-remove"

@@ -44,7 +44,19 @@ export function CartProvider({ children }) {
   }));
   const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
+  function getQuantity(productId) {
+    return cart.find((item) => item.id === Number(productId))?.quantity || 0;
+  }
+
+  function canAddToCart(product) {
+    const stock = Number(product.estoque);
+    if (!Number.isSafeInteger(stock) || stock < 0) return true;
+    return stock > 0 && getQuantity(product.id) < stock;
+  }
+
   function addToCart(product) {
+    if (!canAddToCart(product)) return false;
+
     setCart((currentCart) => {
       const existingItem = currentCart.find((item) => item.id === product.id);
       if (existingItem) {
@@ -55,10 +67,14 @@ export function CartProvider({ children }) {
 
       return [...currentCart, { ...product, id: product.id, quantity: 1 }];
     });
+    return true;
   }
 
   function updateQuantity(productId, quantity) {
     if (!Number.isInteger(quantity) || quantity < 1) return;
+    const product = cart.find((item) => item.id === productId);
+    const stock = Number(product?.estoque);
+    if (Number.isSafeInteger(stock) && stock >= 0 && quantity > stock) return;
 
     setCart((currentCart) =>
       currentCart
@@ -79,7 +95,15 @@ export function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ items, totalItems, addToCart, updateQuantity, removeFromCart, clearCart }}
+      value={{
+        items,
+        totalItems,
+        addToCart,
+        canAddToCart,
+        updateQuantity,
+        removeFromCart,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

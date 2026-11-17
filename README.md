@@ -1,5 +1,16 @@
 # React + Vite
 
+## Demonstração local integrada
+
+Requisitos: Node.js e MySQL.
+
+1. Inicie o MySQL e configure `Ivone-API/.env` a partir de `Ivone-API/.env.example`.
+2. Na pasta `Ivone-API`, execute `npm install`, `npx sequelize-cli db:create`, `npm run db:migrate` e `npm run dev`.
+3. Na pasta `Ivone-Beauty-Products`, copie `.env.example` para `.env.local`, execute `npm install` e `npm run dev`.
+4. Abra o endereço informado pelo Vite (por padrão `http://localhost:5173`). A API deve estar em `http://localhost:3000`.
+
+O exemplo configura o frontend para consumir a API local. Esta configuração é voltada à demonstração em sala; não contém credenciais válidas de produção.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

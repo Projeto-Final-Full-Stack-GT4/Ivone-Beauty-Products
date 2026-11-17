@@ -16,7 +16,7 @@ const CATEGORY_NAMES = {
 
 function Products() {
   const [searchParams] = useSearchParams();
-  const { addToCart } = useCart();
+  const { addToCart, canAddToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -107,8 +107,17 @@ function Products() {
                   currency: 'BRL',
                 })}
               </p>
-              <button className="add-to-cart" type="button" onClick={() => addToCart(product)}>
-                Adicionar ao carrinho
+              <button
+                className="add-to-cart"
+                type="button"
+                onClick={() => addToCart(product)}
+                disabled={!canAddToCart(product)}
+              >
+                {Number(product.estoque) === 0
+                  ? 'Sem estoque'
+                  : canAddToCart(product)
+                    ? 'Adicionar ao carrinho'
+                    : 'Limite no carrinho'}
               </button>
             </article>
           ))}

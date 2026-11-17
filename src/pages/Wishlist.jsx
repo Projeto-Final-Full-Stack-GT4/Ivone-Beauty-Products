@@ -8,7 +8,7 @@ import './Wishlist.css';
 
 function Wishlist() {
   const { items, toggleWishlist, isInWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart, canAddToCart } = useCart();
 
   return (
     <section className="wishlist-page">
@@ -49,8 +49,17 @@ function Wishlist() {
                   currency: 'BRL',
                 })}
               </p>
-              <button className="add-to-cart" type="button" onClick={() => addToCart(product)}>
-                Adicionar ao carrinho
+              <button
+                className="add-to-cart"
+                type="button"
+                onClick={() => addToCart(product)}
+                disabled={!canAddToCart(product)}
+              >
+                {Number(product.estoque) === 0
+                  ? 'Sem estoque'
+                  : canAddToCart(product)
+                    ? 'Adicionar ao carrinho'
+                    : 'Limite no carrinho'}
               </button>
             </article>
           ))}
