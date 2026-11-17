@@ -42,7 +42,7 @@ export default function Header() {
   const menu = [
     ...STATIC_MENU.slice(0, 2),
     ...categories.map((category) => ({
-      texto: category.nome,
+      texto: category.slug === "kits" ? "Kits" : category.nome,
       to: `/products?categoriaId=${category.id}`,
     })),
     STATIC_MENU[2],

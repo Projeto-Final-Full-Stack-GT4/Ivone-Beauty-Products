@@ -42,7 +42,7 @@ export default function About() {
           </p>
           <p>
             Assim surgiu a Ivone Beauty Product, um projeto fictício que reúne
-            skincare, maquiagem, cuidados para os cabelos e kits especiais em
+            skincare, maquiagem, cuidados para os cabelos e kits em
             uma experiência online prática e inspiradora. Mais do que seguir
             tendências, queremos ajudar cada pessoa a construir uma rotina que
             faça sentido para ela.
