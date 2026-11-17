@@ -15,7 +15,7 @@ export function normalizeProduct(product) {
     description: product.description ?? product.descricao ?? 'Descrição indisponível.',
     size: product.size ?? product.tamanho ?? 'Tamanho padrão',
     price: Number(product.price ?? product.preco ?? 0),
-    category: product.category ?? product.categoria ?? 'geral',
+    category: product.categorias?.[0]?.nome ?? product.category ?? product.categoria ?? 'geral',
     image: resolveProductImage(product.image ?? product.imagem),
     tag: product.tag ?? 'Destaque',
   };
@@ -62,6 +62,10 @@ async function apiFetch(path, options = {}) {
 export async function fetchProducts(filters = {}) {
   const params = new URLSearchParams();
 
+  if (filters.categoryId) {
+    params.set('categoriaId', String(filters.categoryId));
+  }
+
   if (filters.category) {
     params.set('categoria', filters.category);
   }
@@ -94,6 +98,33 @@ export async function fetchProducts(filters = {}) {
   }
 
   return products;
+}
+
+export async function fetchCategories({ useInMenu } = {}) {
+  const params = new URLSearchParams({ limite: '100' });
+  if (useInMenu !== undefined) {
+    params.set('use_in_menu', String(useInMenu));
+  }
+
+  const categories = [];
+  let totalPages;
+
+  for (let page = 1; totalPages === undefined || page <= totalPages; page += 1) {
+    params.set('pagina', String(page));
+    const data = await apiFetch(`/categorias?${params.toString()}`);
+
+    if (!data || !Array.isArray(data.categorias) || !Number.isInteger(data.totalPaginas)) {
+      throw new Error('A API retornou uma resposta inválida para as categorias.');
+    }
+    if (totalPages !== undefined && data.totalPaginas !== totalPages) {
+      throw new Error('A paginação das categorias mudou durante o carregamento.');
+    }
+
+    totalPages = data.totalPaginas;
+    categories.push(...data.categorias);
+  }
+
+  return categories;
 }
 
 export async function fetchProductById(productId) {
@@ -166,6 +197,33 @@ export async function fetchAdminProducts(token) {
     throw new Error('A API retornou uma resposta inválida para os produtos administrativos.');
   }
   return data.produtos.map(normalizeProduct);
+}
+
+export async function fetchAdminCategories() {
+  return fetchCategories();
+}
+
+export async function createAdminCategory(payload, token) {
+  return apiFetch('/categorias', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function updateAdminCategory(categoryId, payload, token) {
+  return apiFetch(`/categorias/${categoryId}`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function deleteAdminCategory(categoryId, token) {
+  await apiFetch(`/categorias/${categoryId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
 }
 
 export async function createAdminProduct(payload, token) {

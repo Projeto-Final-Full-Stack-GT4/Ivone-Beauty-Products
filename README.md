@@ -20,7 +20,7 @@ Currently, two official plugins are available:
 
 ## Administração da loja
 
-Usuários com perfil `admin` acessam o painel em `/admin` para gerenciar produtos e estoque, avançar status de pedidos e consultar dados mínimos de contato dos clientes. A API valida o perfil em cada operação administrativa; o painel frontend não substitui essa proteção.
+Usuários com perfil `admin` acessam o painel em `/admin` para gerenciar produtos, categorias e estoque, avançar status de pedidos e consultar dados mínimos de contato dos clientes. Produtos usam categorias carregadas da API; novas categorias com produtos associados não podem ser excluídas. A API valida o perfil em cada operação administrativa; o painel frontend não substitui essa proteção.
 
 ## React Compiler
 

@@ -112,6 +112,17 @@
   resize: vertical;
 }
 
+.admin-product-form .admin-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.admin-checkbox-label input {
+  width: auto;
+  margin: 0;
+}
+
 .admin-form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

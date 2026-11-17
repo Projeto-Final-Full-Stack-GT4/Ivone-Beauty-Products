@@ -46,6 +46,12 @@
   gap: 14px;
 }
 
+.categories-feedback {
+  margin: 1.5rem 0;
+  color: var(--texto-suave);
+  text-align: center;
+}
+
 .category-card {
   position: relative;
   display: block;

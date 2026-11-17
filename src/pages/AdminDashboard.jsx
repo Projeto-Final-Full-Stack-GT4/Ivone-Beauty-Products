@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 import {
+  createAdminCategory,
   createAdminProduct,
+  deleteAdminCategory,
   deactivateAdminProduct,
   fetchAdminCustomers,
+  fetchAdminCategories,
   fetchAdminOrders,
   fetchAdminProducts,
+  updateAdminCategory,
   updateAdminOrderStatus,
   updateAdminProduct,
 } from '../services/api.js';
@@ -14,13 +18,19 @@ import './AdminDashboard.css';
 
 const EMPTY_PRODUCT = {
   nome: '',
-  categoria: 'skincare',
+  categoriaId: '',
   descricao: '',
   tamanho: '',
   preco: '',
   tag: '',
   imagem: '',
   estoque: '0',
+};
+
+const EMPTY_CATEGORY = {
+  nome: '',
+  descricao: '',
+  use_in_menu: true,
 };
 
 const NEXT_ORDER_STATUSES = {
@@ -33,6 +43,7 @@ const NEXT_ORDER_STATUSES = {
 
 const SECTIONS = [
   { id: 'products', label: 'Produtos e estoque' },
+  { id: 'categories', label: 'Categorias' },
   { id: 'orders', label: 'Pedidos' },
   { id: 'customers', label: 'Clientes' },
 ];
@@ -41,10 +52,13 @@ export default function AdminDashboard() {
   const { user, token, isLoading } = useAuth();
   const [section, setSection] = useState('products');
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [orders, setOrders] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [editingCategory, setEditingCategory] = useState(null);
   const [productForm, setProductForm] = useState(EMPTY_PRODUCT);
+  const [categoryForm, setCategoryForm] = useState(EMPTY_CATEGORY);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -54,8 +68,17 @@ export default function AdminDashboard() {
     async function loadSection() {
       try {
         if (section === 'products') {
-          const result = await fetchAdminProducts(token);
-          if (active) setProducts(result);
+          const [productResults, categoryResults] = await Promise.all([
+            fetchAdminProducts(token),
+            fetchAdminCategories(),
+          ]);
+          if (active) {
+            setProducts(productResults);
+            setCategories(categoryResults);
+          }
+        } else if (section === 'categories') {
+          const result = await fetchAdminCategories();
+          if (active) setCategories(result);
         } else if (section === 'orders') {
           const result = await fetchAdminOrders(token);
           if (active) setOrders(result);
@@ -99,7 +122,11 @@ export default function AdminDashboard() {
     setEditingProduct(product);
     setProductForm({
       nome: product.nome,
-      categoria: product.categoria,
+      categoriaId: String(
+        product.categorias?.[0]?.id ??
+        categories.find((category) => category.slug === product.categoria)?.id ??
+        ''
+      ),
       descricao: product.descricao,
       tamanho: product.tamanho,
       preco: String(product.preco),
@@ -123,7 +150,7 @@ export default function AdminDashboard() {
 
     const payload = {
       nome: productForm.nome.trim(),
-      categoria: productForm.categoria,
+      categoriaId: Number(productForm.categoriaId),
       descricao: productForm.descricao.trim(),
       tamanho: productForm.tamanho.trim(),
       preco: Number(productForm.preco),
@@ -146,6 +173,86 @@ export default function AdminDashboard() {
       resetProductForm();
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : 'Não foi possível salvar o produto.');
+    }
+  }
+
+  function resetCategoryForm() {
+    setEditingCategory(null);
+    setCategoryForm(EMPTY_CATEGORY);
+  }
+
+  function editCategory(category) {
+    setEditingCategory(category);
+    setCategoryForm({
+      nome: category.nome,
+      descricao: category.descricao || '',
+      use_in_menu: category.use_in_menu,
+    });
+    setError('');
+    setSuccess('');
+  }
+
+  async function handleCategorySubmit(event) {
+    event.preventDefault();
+    setError('');
+    setSuccess('');
+
+    const payload = {
+      nome: categoryForm.nome.trim(),
+      descricao: categoryForm.descricao.trim() || null,
+      use_in_menu: categoryForm.use_in_menu,
+    };
+
+    try {
+      const savedCategory = editingCategory
+        ? await updateAdminCategory(editingCategory.id, payload, token)
+        : await createAdminCategory(payload, token);
+
+      setCategories((current) => (
+        [...current.filter((category) => category.id !== savedCategory.id), savedCategory]
+          .sort((a, b) => a.id - b.id)
+      ));
+      setSuccess(editingCategory ? 'Categoria atualizada.' : 'Categoria cadastrada.');
+      resetCategoryForm();
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : 'Não foi possível salvar a categoria.');
+    }
+  }
+
+  async function toggleCategoryMenu(category) {
+    setError('');
+    setSuccess('');
+
+    try {
+      const updatedCategory = await updateAdminCategory(
+        category.id,
+        { use_in_menu: !category.use_in_menu },
+        token
+      );
+      setCategories((current) => current.map((item) => (
+        item.id === updatedCategory.id ? updatedCategory : item
+      )));
+      setSuccess(
+        updatedCategory.use_in_menu
+          ? 'Categoria exibida no menu.'
+          : 'Categoria removida do menu.'
+      );
+    } catch (updateError) {
+      setError(updateError instanceof Error ? updateError.message : 'Não foi possível atualizar a categoria.');
+    }
+  }
+
+  async function removeCategory(category) {
+    setError('');
+    setSuccess('');
+
+    try {
+      await deleteAdminCategory(category.id, token);
+      setCategories((current) => current.filter((item) => item.id !== category.id));
+      setSuccess('Categoria excluída.');
+      if (editingCategory?.id === category.id) resetCategoryForm();
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : 'Não foi possível excluir a categoria.');
     }
   }
 
@@ -227,14 +334,15 @@ export default function AdminDashboard() {
             <label>
               Categoria
               <select
-                name="categoria"
-                value={productForm.categoria}
-                onChange={(event) => setProductForm({ ...productForm, categoria: event.target.value })}
+                name="categoriaId"
+                value={productForm.categoriaId}
+                onChange={(event) => setProductForm({ ...productForm, categoriaId: event.target.value })}
+                required
               >
-                <option value="skincare">Skincare</option>
-                <option value="maquiagem">Maquiagem</option>
-                <option value="cabelos">Cabelos</option>
-                <option value="kits">Kits</option>
+                <option value="" disabled>Selecione uma categoria</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>{category.nome}</option>
+                ))}
               </select>
             </label>
             <label>
@@ -341,6 +449,90 @@ export default function AdminDashboard() {
                           <button type="button" onClick={() => toggleProductStatus(product)}>
                             {product.ativo ? 'Desativar' : 'Reativar'}
                           </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {section === 'categories' && (
+        <div className="admin-products">
+          <form className="admin-panel admin-product-form" onSubmit={handleCategorySubmit}>
+            <h2>{editingCategory ? 'Editar categoria' : 'Cadastrar categoria'}</h2>
+            <label>
+              Nome
+              <input
+                name="nome"
+                value={categoryForm.nome}
+                onChange={(event) => setCategoryForm({ ...categoryForm, nome: event.target.value })}
+                required
+              />
+            </label>
+            <label>
+              Descrição
+              <textarea
+                name="descricao"
+                value={categoryForm.descricao}
+                onChange={(event) => setCategoryForm({ ...categoryForm, descricao: event.target.value })}
+                rows="3"
+              />
+            </label>
+            <label className="admin-checkbox-label">
+              <input
+                name="use_in_menu"
+                type="checkbox"
+                checked={categoryForm.use_in_menu}
+                onChange={(event) => setCategoryForm({
+                  ...categoryForm,
+                  use_in_menu: event.target.checked,
+                })}
+              />
+              Exibir no menu
+            </label>
+            <div className="admin-form-actions">
+              <button type="submit" className="admin-primary-button">
+                {editingCategory ? 'Salvar alterações' : 'Cadastrar categoria'}
+              </button>
+              {editingCategory && (
+                <button type="button" className="admin-secondary-button" onClick={resetCategoryForm}>
+                  Cancelar edição
+                </button>
+              )}
+            </div>
+          </form>
+
+          <div className="admin-panel">
+            <h2>Categorias</h2>
+            {categories.length === 0 ? (
+              <p>Nenhuma categoria cadastrada.</p>
+            ) : (
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Slug</th>
+                      <th>Menu</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {categories.map((category) => (
+                      <tr key={category.id}>
+                        <td>{category.nome}</td>
+                        <td>{category.slug}</td>
+                        <td>{category.use_in_menu ? 'Visível' : 'Oculta'}</td>
+                        <td className="admin-row-actions">
+                          <button type="button" onClick={() => editCategory(category)}>Editar</button>
+                          <button type="button" onClick={() => toggleCategoryMenu(category)}>
+                            {category.use_in_menu ? 'Ocultar' : 'Exibir'}
+                          </button>
+                          <button type="button" onClick={() => removeCategory(category)}>Excluir</button>
                         </td>
                       </tr>
                     ))}

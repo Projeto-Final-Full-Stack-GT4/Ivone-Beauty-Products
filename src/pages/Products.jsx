@@ -5,24 +5,35 @@ import { useCart } from '../context/CartContext.js';
 import { useWishlist } from '../context/WishlistContext.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { fetchProducts } from '../services/api.js';
-
-const CATEGORY_NAMES = {
-  skincare: 'Skincare',
-  maquiagem: 'Maquiagem',
-  cabelos: 'Cabelos',
-  kits: 'Kits especiais',
-};
+import { fetchCategories, fetchProducts } from '../services/api.js';
 
 function Products() {
   const [searchParams] = useSearchParams();
   const { addToCart, canAddToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const category = searchParams.get('categoria');
+  const categoryId = searchParams.get('categoriaId');
+  const legacyCategory = searchParams.get('categoria');
   const searchTerm = searchParams.get('busca')?.trim() ?? '';
+
+  useEffect(() => {
+    let active = true;
+
+    fetchCategories()
+      .then((data) => {
+        if (active) setCategories(data);
+      })
+      .catch((error) => {
+        console.error('Não foi possível carregar as categorias.', error);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -30,7 +41,8 @@ function Products() {
     async function loadProducts() {
       try {
         const data = await fetchProducts({
-          category: category || undefined,
+          categoryId: categoryId || undefined,
+          category: legacyCategory || undefined,
           search: searchTerm || undefined,
         });
 
@@ -54,12 +66,14 @@ function Products() {
     return () => {
       active = false;
     };
-  }, [category, searchTerm]);
+  }, [categoryId, legacyCategory, searchTerm]);
 
   const pageTitle = searchTerm
     ? `Resultados para "${searchTerm}"`
-    : category
-      ? CATEGORY_NAMES[category] || 'Categoria não encontrada'
+    : categoryId
+      ? categories.find((category) => String(category.id) === categoryId)?.nome || 'Categoria'
+      : legacyCategory
+      ? categories.find((category) => category.slug === legacyCategory)?.nome || legacyCategory
       : 'Todos os produtos';
 
   return (

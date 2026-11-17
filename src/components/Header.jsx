@@ -1,28 +1,52 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faMagnifyingGlass, faBagShopping, faTruck, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useCart } from "../context/CartContext.js";
 import { useAuth } from "../context/AuthContext.js";
+import { fetchCategories } from "../services/api.js";
 import "./Header.css";
 
-// Edite aqui os links do menu (to = rota)
-const MENU = [
+const STATIC_MENU = [
   { texto: "Início", to: "/" },
   { texto: "Produtos", to: "/products" },
-  { texto: "Skincare", to: "/products?categoria=skincare" },
-  { texto: "Maquiagem", to: "/products?categoria=maquiagem" },
-  { texto: "Kits", to: "/products?categoria=kits" },
   { texto: "Sobre nós", to: "/sobre" },
 ];
 
 export default function Header() {
+  const [categories, setCategories] = useState([]);
   const { pathname, search } = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { totalItems } = useCart();
   const { user } = useAuth();
   const atual = pathname + search;
+
+  useEffect(() => {
+    let active = true;
+
+    fetchCategories({ useInMenu: true })
+      .then((result) => {
+        if (active) setCategories(result);
+      })
+      .catch((error) => {
+        console.error("Não foi possível carregar as categorias do menu.", error);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [pathname]);
+
+  const menu = [
+    ...STATIC_MENU.slice(0, 2),
+    ...categories.map((category) => ({
+      texto: category.nome,
+      to: `/products?categoriaId=${category.id}`,
+    })),
+    STATIC_MENU[2],
+  ];
 
   function handleSearch(event) {
     event.preventDefault();
@@ -63,7 +87,7 @@ export default function Header() {
         </Link>
 
         <nav className="header__nav" aria-label="Menu principal">
-          {MENU.map(({ texto, to }) => (
+          {menu.map(({ texto, to }) => (
             <Link key={to} to={to} className={"header__link" + (atual === to ? " header__link--ativo" : "")} aria-current={atual === to ? "page" : undefined}>
               {texto}
             </Link>
