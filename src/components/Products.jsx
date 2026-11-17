@@ -1,12 +1,12 @@
 
 import './Products.css';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext.js';
 import { useWishlist } from '../context/WishlistContext.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchProducts } from '../services/api.js';
-import React from 'react';
 
 function Products() {
   const { addToCart } = useCart();
@@ -66,11 +66,15 @@ function Products() {
               </button>
 
               <div className="product-image">
-                <img src={product.image} alt={product.name} />
+                <Link to={`/product/${product.id}`}>
+                  <img src={product.image} alt={product.name} />
+                </Link>
               </div>
 
               <div className="product-info">
-                <h3>{product.name}</h3>
+                <Link to={`/product/${product.id}`}>
+                  <h3>{product.name}</h3>
+                </Link>
                 <p className="product-size">{product.size}</p>
               </div>
 

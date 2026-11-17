@@ -126,3 +126,22 @@ export async function loginUser(payload) {
 
   return data;
 }
+
+export async function createOrder(items, token) {
+  const data = await apiFetch('/pedidos', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify({
+      itens: items.map(({ id, quantity }) => ({
+        produtoId: id,
+        quantidade: quantity,
+      })),
+    }),
+  });
+
+  if (!data?.pedido || !Number.isInteger(data.pedido.id) || !data.pedido.total) {
+    throw new Error('A API retornou uma resposta inválida para o pedido.');
+  }
+
+  return data.pedido;
+}
