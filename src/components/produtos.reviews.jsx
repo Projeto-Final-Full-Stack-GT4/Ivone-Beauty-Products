@@ -1,4 +1,24 @@
-import React from 'react';
+function formatReviewDate(value) {
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  const isoDate = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (isoDate) {
+    return `${isoDate[3]}/${isoDate[2]}/${isoDate[1]}`;
+  }
+
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+    return value;
+  }
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat('pt-BR').format(date);
+}
 
 export function ProductReviews({ reviews }) {
   // Evita erro caso algum produto ainda não tenha avaliações cadastradas
@@ -18,7 +38,12 @@ export function ProductReviews({ reviews }) {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
               <strong>{review.user}</strong>
-              <span style={{ color: '#888', fontSize: '0.85rem' }}>{review.date}</span>
+              <time
+                dateTime={review.date}
+                style={{ color: '#888', fontSize: '0.85rem' }}
+              >
+                {formatReviewDate(review.date)}
+              </time>
             </div>
             
             {/* Exibe as estrelas baseadas na nota */}
