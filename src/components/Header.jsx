@@ -68,6 +68,15 @@ export default function Header() {
               {texto}
             </Link>
           ))}
+          {user?.role === "admin" && (
+            <Link
+              to="/admin"
+              className={"header__link" + (pathname === "/admin" ? " header__link--ativo" : "")}
+              aria-current={pathname === "/admin" ? "page" : undefined}
+            >
+              Administração
+            </Link>
+          )}
         </nav>
 
         <div className="header__acoes">

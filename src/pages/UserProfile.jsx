@@ -3,8 +3,18 @@ import { useAuth } from "../context/AuthContext.js";
 import "./Account.css";
 
 export default function UserProfile() {
-  const { user, logout } = useAuth();
+  const { user, isLoading, sessionError, logout } = useAuth();
   const navigate = useNavigate();
+
+  if (isLoading) {
+    return (
+      <section className="account-page">
+        <div className="account-card">
+          <h1>Validando sua sessão...</h1>
+        </div>
+      </section>
+    );
+  }
 
   if (!user) {
     return <Navigate to="/login" replace />;
@@ -24,6 +34,12 @@ export default function UserProfile() {
         <p className="account-card__description">
           Olá, {nomeCompleto}
         </p>
+
+        {sessionError && (
+          <p className="account-form__error" role="alert">
+            {sessionError}
+          </p>
+        )}
 
         <div className="account-details">
           <p>

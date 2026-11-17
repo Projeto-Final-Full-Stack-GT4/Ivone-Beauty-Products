@@ -10,6 +10,7 @@ import About from './pages/About.jsx';
 import Wishlist from './pages/Wishlist.jsx';
 import UserLogin from './pages/UserLogin.jsx';
 import UserProfile from './pages/UserProfile.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
 import { AuthProvider } from './context/AuthProvider.jsx';
 import { CartProvider } from './context/CartProvider.jsx';
 import { WishlistProvider } from './context/WishlistProvider.jsx';
@@ -32,6 +33,7 @@ function App() {
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/login" element={<UserLogin />} />
               <Route path="/dados-pessoais" element={<UserProfile />} />
+              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/registro" element={<UserRegister />} />
               <Route path="/sobre" element={<About />} />
               <Route path="*" element={<p>Esta página estará disponível em breve.</p>} />

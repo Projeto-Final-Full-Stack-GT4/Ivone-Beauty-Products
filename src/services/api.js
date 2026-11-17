@@ -127,6 +127,18 @@ export async function loginUser(payload) {
   return data;
 }
 
+export async function fetchCurrentUser(token) {
+  const data = await apiFetch('/auth/me', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!data?.usuario || typeof data.usuario !== 'object') {
+    throw new Error('A API retornou uma resposta inválida para a sessão.');
+  }
+
+  return data.usuario;
+}
+
 export async function createOrder(items, token) {
   const data = await apiFetch('/pedidos', {
     method: 'POST',
@@ -144,4 +156,71 @@ export async function createOrder(items, token) {
   }
 
   return data.pedido;
+}
+
+export async function fetchAdminProducts(token) {
+  const data = await apiFetch('/produtos/admin', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!Array.isArray(data?.produtos)) {
+    throw new Error('A API retornou uma resposta inválida para os produtos administrativos.');
+  }
+  return data.produtos.map(normalizeProduct);
+}
+
+export async function createAdminProduct(payload, token) {
+  const data = await apiFetch('/produtos', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  return normalizeProduct(data);
+}
+
+export async function updateAdminProduct(productId, payload, token) {
+  const data = await apiFetch(`/produtos/${productId}`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+  return normalizeProduct(data);
+}
+
+export async function deactivateAdminProduct(productId, token) {
+  await apiFetch(`/produtos/${productId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export async function fetchAdminOrders(token) {
+  const data = await apiFetch('/pedidos', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!Array.isArray(data?.pedidos)) {
+    throw new Error('A API retornou uma resposta inválida para os pedidos.');
+  }
+  return data.pedidos;
+}
+
+export async function updateAdminOrderStatus(orderId, status, token) {
+  const data = await apiFetch(`/pedidos/${orderId}/status`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ status }),
+  });
+  if (!data?.pedido || data.pedido.id !== orderId) {
+    throw new Error('A API retornou uma resposta inválida para a atualização do pedido.');
+  }
+  return data.pedido;
+}
+
+export async function fetchAdminCustomers(token) {
+  const data = await apiFetch('/usuarios', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!Array.isArray(data)) {
+    throw new Error('A API retornou uma resposta inválida para os clientes.');
+  }
+  return data;
 }

@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext.js";
 import "./Account.css";
 
 export default function UserLogin() {
-  const { user, login } = useAuth();
+  const { user, sessionError, login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -72,6 +72,12 @@ export default function UserLogin() {
           {error && (
             <p className="account-form__error" role="alert">
               {error}
+            </p>
+          )}
+
+          {sessionError && (
+            <p className="account-form__error" role="alert">
+              {sessionError}
             </p>
           )}
 

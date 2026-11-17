@@ -1,0 +1,262 @@
+.admin-page {
+  max-width: var(--largura-conteudo);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.admin-heading {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.admin-heading > p {
+  margin: 0 0 0.3rem;
+  color: var(--oliva);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-heading h1 {
+  margin: 0;
+  color: var(--vinho);
+  font-family: var(--fonte-titulo);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 500;
+}
+
+.admin-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+}
+
+.admin-tab,
+.admin-primary-button,
+.admin-secondary-button {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--vinho);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-tab {
+  background: transparent;
+  color: var(--vinho);
+  white-space: nowrap;
+}
+
+.admin-tab--active,
+.admin-primary-button {
+  background: var(--vinho);
+  color: #fff;
+}
+
+.admin-panel {
+  min-width: 0;
+  padding: 1.25rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 0.75rem;
+}
+
+.admin-panel h2 {
+  margin: 0 0 1rem;
+  color: var(--vinho);
+  font-family: var(--fonte-titulo);
+  font-size: 1.65rem;
+  font-weight: 500;
+}
+
+.admin-products {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.5fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+.admin-product-form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.admin-product-form label,
+.admin-status-control {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--texto);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.admin-product-form input,
+.admin-product-form select,
+.admin-product-form textarea,
+.admin-status-control select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.35rem;
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+}
+
+.admin-product-form textarea {
+  resize: vertical;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.admin-primary-button,
+.admin-secondary-button {
+  font-size: 0.85rem;
+}
+
+.admin-secondary-button {
+  background: transparent;
+  color: var(--vinho);
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.7rem 0.55rem;
+  border-bottom: 1px solid var(--borda);
+  vertical-align: middle;
+}
+
+.admin-table th {
+  color: var(--vinho);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.admin-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.admin-row-actions button {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--vinho);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.admin-order-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.admin-order {
+  padding: 1rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.55rem;
+}
+
+.admin-order-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-order-heading h3,
+.admin-order-heading p,
+.admin-order-meta {
+  margin: 0;
+}
+
+.admin-order-heading h3 {
+  color: var(--vinho);
+  font-size: 1rem;
+}
+
+.admin-order-heading p,
+.admin-order-meta {
+  margin-top: 0.25rem;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+.admin-order-heading > strong {
+  color: var(--vinho);
+  white-space: nowrap;
+}
+
+.admin-order ul {
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.admin-status-control {
+  max-width: 15rem;
+}
+
+.admin-feedback {
+  padding: 0.7rem 1rem;
+  border-radius: 0.4rem;
+  background: #eef3e8;
+  color: #3e5b29;
+}
+
+.admin-feedback--error {
+  background: #fae9e9;
+  color: #a32132;
+}
+
+@media (max-width: 900px) {
+  .admin-products {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-page {
+    padding: 1.5rem 0.85rem 2rem;
+  }
+
+  .admin-tabs {
+    justify-content: flex-start;
+  }
+
+  .admin-panel {
+    padding: 0.9rem;
+  }
+
+  .admin-order-heading {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}
