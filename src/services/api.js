@@ -1,7 +1,7 @@
 import placeholderImage from '../assets/hero-produtos.jpg';
-import mockProducts from '../data/products.jsx';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1';
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1').replace(/\/+$/, '');
+const API_BASE_URL = `${API_URL}/`;
 
 export function normalizeProduct(product) {
   if (!product || typeof product !== 'object') {
@@ -16,18 +16,34 @@ export function normalizeProduct(product) {
     size: product.size ?? product.tamanho ?? 'Tamanho padrão',
     price: Number(product.price ?? product.preco ?? 0),
     category: product.category ?? product.categoria ?? 'geral',
-    image: product.image ?? product.imagem ?? placeholderImage,
+    image: resolveProductImage(product.image ?? product.imagem),
     tag: product.tag ?? 'Destaque',
   };
 }
 
+function resolveProductImage(image) {
+  if (!image) {
+    return placeholderImage;
+  }
+
+  try {
+    const imageUrl = new URL(image, API_BASE_URL);
+    if (!['http:', 'https:'].includes(imageUrl.protocol)) {
+      throw new Error('Protocolo de imagem inválido.');
+    }
+    return imageUrl.toString();
+  } catch {
+    throw new Error('A imagem do produto possui uma URL inválida.');
+  }
+}
+
 async function apiFetch(path, options = {}) {
   const response = await fetch(`${API_URL}${path}`, {
+    ...options,
     headers: {
-      'Content-Type': 'application/json',
+      ...(options.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
       ...(options.headers || {}),
     },
-    ...options,
   });
 
   const contentType = response.headers.get('content-type') || '';
@@ -43,27 +59,6 @@ async function apiFetch(path, options = {}) {
   return payload;
 }
 
-function normalizeText(value) {
-  return value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLocaleLowerCase('pt-BR');
-}
-
-function isBackendUnavailable(error) {
-  return !Number.isInteger(error?.status) || error.status >= 500;
-}
-
-function filterMockProducts(filters = {}) {
-  const search = normalizeText(filters.search || '');
-
-  return mockProducts.filter((product) => {
-    const matchesCategory = !filters.category || product.category === filters.category;
-    const matchesSearch = !search || normalizeText(`${product.name} ${product.description}`).includes(search);
-    return matchesCategory && matchesSearch;
-  });
-}
-
 export async function fetchProducts(filters = {}) {
   const params = new URLSearchParams();
 
@@ -75,34 +70,35 @@ export async function fetchProducts(filters = {}) {
     params.set('busca', filters.search);
   }
 
-  const query = params.toString();
-  try {
-    const data = await apiFetch(query ? `/produtos?${query}` : '/produtos');
-    const items = Array.isArray(data) ? data : [];
+  params.set('limit', '100');
+  const products = [];
+  let totalPages;
 
-    return items.map(normalizeProduct).filter(Boolean);
-  } catch (error) {
-    if (!isBackendUnavailable(error)) {
-      throw error;
+  for (let page = 1; totalPages === undefined || page <= totalPages; page += 1) {
+    params.set('page', String(page));
+    const data = await apiFetch(`/produtos?${params.toString()}`);
+
+    if (!data || !Array.isArray(data.produtos) || !Number.isInteger(data.totalPaginas)) {
+      throw new Error('A API retornou uma resposta inválida para a lista de produtos.');
+    }
+    if (totalPages !== undefined && data.totalPaginas !== totalPages) {
+      throw new Error('A paginação dos produtos mudou durante o carregamento.');
     }
 
-    console.warn('API de produtos indisponível; usando catálogo demonstrativo local.', error);
-    return filterMockProducts(filters);
+    totalPages = data.totalPaginas;
+    const pageProducts = data.produtos.map(normalizeProduct);
+    if (pageProducts.some((product) => !product)) {
+      throw new Error('A API retornou um produto inválido na lista.');
+    }
+    products.push(...pageProducts);
   }
+
+  return products;
 }
 
 export async function fetchProductById(productId) {
-  try {
-    const data = await apiFetch(`/produtos/${productId}`);
-    return normalizeProduct(data);
-  } catch (error) {
-    if (!isBackendUnavailable(error)) {
-      throw error;
-    }
-
-    console.warn('API de produtos indisponível; usando catálogo demonstrativo local.', error);
-    return mockProducts.find((product) => product.id === Number(productId)) || null;
-  }
+  const data = await apiFetch(`/produtos/${productId}`);
+  return normalizeProduct(data);
 }
 
 export async function registerUser(payload) {
